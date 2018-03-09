@@ -17,6 +17,7 @@
     <modules>
         <module>service-common</module>
         <module>service-web</module>
+        <module>service-event</module>
     </modules>
 
     <dependencyManagement>
@@ -24,6 +25,12 @@
             <dependency>
                 <groupId>com.jzc.spring</groupId>
                 <artifactId>service-common</artifactId>
+                <version>${jzc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.jzc.spring</groupId>
+                <artifactId>service-event</artifactId>
                 <version>${jzc.version}</version>
             </dependency>
 
@@ -96,6 +103,18 @@
                 <version>4.4.1</version>
             </dependency>
 
+            <!-- mysql驱动包 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -103,6 +122,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.plugin.version>2.3.2</maven.compiler.plugin.version>
+        <java.version>1.8</java.version>
         <dubbo.version>2.5.3</dubbo.version>
         <zookeeper.version>3.4.5</zookeeper.version>
 
