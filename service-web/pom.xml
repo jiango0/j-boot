@@ -12,6 +12,16 @@
 	<artifactId>service-web</artifactId>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.jzc.spring</groupId>
+			<artifactId>service-common</artifactId>
+			<version>${jzc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jzc.spring</groupId>
+			<artifactId>service-event</artifactId>
+			<version>${jzc.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
