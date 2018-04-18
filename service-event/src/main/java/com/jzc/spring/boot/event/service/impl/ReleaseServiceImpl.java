@@ -1,9 +1,10 @@
 package com.jzc.spring.boot.event.service.impl;
 
-import com.jzc.spring.boot.event.dao.CommentRepository;
-import com.jzc.spring.boot.event.entity.Comment;
-import com.jzc.spring.boot.event.service.CommentService;
+import com.jzc.spring.boot.event.dao.ReleaseRepository;
+import com.jzc.spring.boot.event.entity.Release;
+import com.jzc.spring.boot.event.service.ReleaseService;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,28 +16,26 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CommentServiceImpl implements CommentService {
-
-    @Autowired
-    CommentRepository commentRepository;
+public class ReleaseServiceImpl implements ReleaseService {
 
     @Autowired
     ElasticsearchTemplate elasticsearchTemplate;
 
+    @Autowired
+    ReleaseRepository releaseRepository;
 
-
-    public void save(Comment comment) {
-        commentRepository.save(comment);
+    public void save(Release release) {
+        releaseRepository.save(release);
     }
 
-    public List<Comment> list(String name) {
+    public List<Release> singleList(String search) {
         BoolQueryBuilder qb = QueryBuilders.boolQuery();
-        qb.must(QueryBuilders.matchQuery("content", name));
+        qb.must(QueryBuilders.matchQuery("title", search))
+                .should(QueryBuilders.matchQuery("content", search));
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(qb).build();
+        Page<Release> result = releaseRepository.search(searchQuery);
 
-        Page<Comment> search = commentRepository.search(searchQuery);
-
-        return search.getContent();
+        return result.getContent();
     }
 
 }
