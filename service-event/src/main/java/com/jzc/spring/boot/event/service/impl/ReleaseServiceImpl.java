@@ -4,7 +4,6 @@ import com.jzc.spring.boot.event.dao.ReleaseRepository;
 import com.jzc.spring.boot.event.entity.Release;
 import com.jzc.spring.boot.event.service.ReleaseService;
 import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
