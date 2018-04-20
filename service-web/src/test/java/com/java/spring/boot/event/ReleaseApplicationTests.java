@@ -29,9 +29,9 @@ public class ReleaseApplicationTests {
     public void save() {
         Release release = new Release();
 
-        release.setId(System.currentTimeMillis());
-        release.setTitle("武汉真好");
-        release.setContent("武汉那里好了");
+        release.setId(1524061054195L);
+        release.setTitle("北京那里好");
+        release.setContent("北京那里都好");
         release.setCreateDate(new Date());
         release.setCreateDateLong(release.getCreateDate().getTime());
         release.setLastUpdate(new Date());
@@ -45,6 +45,11 @@ public class ReleaseApplicationTests {
         List<Release> list = releaseService.singleList("樱花");
 
         System.out.println(JSON.toJSONString(list, SerializerFeature.PrettyFormat));
+    }
+
+    @Test
+    public void delete() {
+        releaseService.delete(1524063516360L);
     }
 
     @Test

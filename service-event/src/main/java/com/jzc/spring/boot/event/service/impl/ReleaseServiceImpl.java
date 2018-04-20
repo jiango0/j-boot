@@ -39,6 +39,10 @@ public class ReleaseServiceImpl implements ReleaseService {
         return result.getContent();
     }
 
+    public void delete(Long id) {
+        releaseRepository.delete(id);
+    }
+
     public PageList<Release> getPage(String search, Pageable pageable) {
         BoolQueryBuilder qb = QueryBuilders.boolQuery();
 
@@ -58,8 +62,8 @@ public class ReleaseServiceImpl implements ReleaseService {
 
     public Release detail(Long id) {
 //        StringQuery stringQuery = new StringQuery("id="+id);
-//
 //        return elasticsearchTemplate.queryForObject(stringQuery, Release.class);
+
         return releaseRepository.findOne(id);
     }
 

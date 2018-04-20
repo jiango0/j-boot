@@ -1,0 +1,122 @@
+[
+	{
+		"name": "华为荣耀 畅玩7X",
+		"fqun": "HWRY",
+		"model": "4G+64G",
+		"spec": "4.5英寸",
+		"color": "极光蓝",
+		"popularName": "荣耀",
+		"popularFqun": "RY",
+		"stockNum": "100",
+		"unitPrice": "800",
+		"purchasePrice": "1249"
+	},
+	{
+		"name": "华为Mate 10",
+		"fqun": "HWMATE 10",
+		"model": "64G",
+		"spec": "5.9英寸",
+		"color": "樱粉金",
+		"popularName": "mate 10",
+		"popularFqun": "mate 10",
+		"stockNum": "100",
+		"unitPrice": "1200",
+		"purchasePrice": "3599"
+	},
+	{
+		"name": "小米5X",
+		"fqun": "XM5X",
+		"model": "4GB+64GB",
+		"spec": "5.5英寸",
+		"color": "金色",
+		"popularName": "小米",
+		"popularFqun": "xm",
+		"stockNum": "300",
+		"unitPrice": "900",
+		"purchasePrice": "1299"
+	},
+	{
+		"name": "小米MIX2",
+		"fqun": "XMMIX2",
+		"model": "8GB+128GB",
+		"spec": "5.99英寸",
+		"color": "皓月白",
+		"popularName": "MIX2",
+		"popularFqun": "MIX2",
+		"stockNum": "200",
+		"unitPrice": "3000",
+		"purchasePrice": "4299"
+	},
+	{
+		"name": "小米6",
+		"fqun": "XM6",
+		"model": "6GB+128GB",
+		"spec": "5.9英寸",
+		"color": "陶瓷黑",
+		"popularName": "小米",
+		"popularFqun": "xm",
+		"stockNum": "100",
+		"unitPrice": "1600",
+		"purchasePrice": "3099"
+	},
+	{
+		"name": "三星 Galaxy Note8",
+		"fqun": "SX NOTE8",
+		"model": "6GB+64GB",
+		"spec": "6.3英寸",
+		"color": "谜夜黑",
+		"popularName": "NOTE 8",
+		"popularFqun": "NOTE 8",
+		"stockNum": "150",
+		"unitPrice": "4500",
+		"purchasePrice": "6988"
+	},
+	{
+		"name": "三星 Galaxy S9+",
+		"fqun": "SX S9+",
+		"model": "6GB+128GB",
+		"spec": "6.2英寸",
+		"color": "谜夜黑",
+		"popularName": "S9+",
+		"popularFqun": "S9+",
+		"stockNum": "1000",
+		"unitPrice": "4300",
+		"purchasePrice": "6999"
+	},
+	{
+		"name": "iPhone X",
+		"fqun": "iPhone X",
+		"model": "256G",
+		"spec": "6.2英寸",
+		"color": "银色",
+		"popularName": "iPhone X",
+		"popularFqun": "iPhone X",
+		"stockNum": "1500",
+		"unitPrice": "8500",
+		"purchasePrice": "9359"
+	},
+	{
+		"name": "iPhone7 Plus",
+		"fqun": "iPhone7 Plus",
+		"model": "32G",
+		"spec": "5.5英寸",
+		"color": "金色",
+		"popularName": "iPhone7 Plus",
+		"popularFqun": "iPhone7 Plus",
+		"stockNum": "850",
+		"unitPrice": "2200",
+		"purchasePrice": "5009"
+	},
+	{
+		"name": "诺基亚 7",
+		"fqun": "RJY 7",
+		"model": "4GB+64GB",
+		"spec": "5.2英寸",
+		"color": "黑",
+		"popularName": "诺基亚",
+		"popularFqun": "RJY",
+		"stockNum": "20",
+		"unitPrice": "800",
+		"purchasePrice": "1799"
+	}
+]

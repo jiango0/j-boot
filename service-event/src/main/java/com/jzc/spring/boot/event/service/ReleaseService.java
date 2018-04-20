@@ -12,6 +12,8 @@ public interface ReleaseService {
 
     List<Release> singleList(String search);
 
+    void delete(Long id);
+
     PageList<Release> getPage(String search, Pageable pageable);
 
     Release detail(Long id);
