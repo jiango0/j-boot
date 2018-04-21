@@ -10,6 +10,14 @@ public interface GoodsService {
 
     List<Goods> getTerm(String spec);
 
+    List<Goods> getMatch(String name);
+
+    List<Goods> getMatchPhrase(String name);
+
     List<Goods> getBoolQuery(String name, Integer stockNum, String spec);
+
+    List<Goods> getTerms(Integer[] stockNum);
+
+    List<Goods> getRange(Integer start, Integer end);
 
 }

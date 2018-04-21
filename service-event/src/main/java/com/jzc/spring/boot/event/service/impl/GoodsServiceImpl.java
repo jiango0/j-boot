@@ -3,14 +3,10 @@ package com.jzc.spring.boot.event.service.impl;
 import com.jzc.spring.boot.event.dao.GoodsRepository;
 import com.jzc.spring.boot.event.entity.Goods;
 import com.jzc.spring.boot.event.service.GoodsService;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -53,6 +49,26 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     /**
+     * 全文检索，按照分词的结果进行查询
+     * */
+    public List<Goods> getMatch(String name) {
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.matchQuery("name", name)).build();
+
+        return elasticsearchTemplate.queryForList(searchQuery, Goods.class);
+    }
+
+    /**
+     * 全文检索，模糊匹配，类似与like的方式
+     * */
+    public List<Goods> getMatchPhrase(String name) {
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.matchPhraseQuery("name", name)).build();
+
+        return elasticsearchTemplate.queryForList(searchQuery, Goods.class);
+    }
+
+    /**
      * 组合查询
      * */
     public List<Goods> getBoolQuery(String name, Integer stockNum, String spec) {
@@ -66,6 +82,29 @@ public class GoodsServiceImpl implements GoodsService {
         NativeSearchQuery build = new NativeSearchQueryBuilder().withQuery(qb).build();
 
         return elasticsearchTemplate.queryForList(build, Goods.class);
+    }
+
+    /**
+     * 多字段精确查询
+     * */
+    public List<Goods> getTerms(Integer[] stockNum) {
+        TermsQueryBuilder terms = new TermsQueryBuilder("stockNum", stockNum);
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(terms).build();
+
+        return elasticsearchTemplate.queryForList(searchQuery, Goods.class);
+    }
+
+    /**
+     * 范围查询
+     * */
+    public List<Goods> getRange(Integer start, Integer end) {
+        RangeQueryBuilder stockNum = new RangeQueryBuilder("stockNum");
+        stockNum.gte(start).lte(end);
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(stockNum).build();
+
+        return elasticsearchTemplate.queryForList(searchQuery, Goods.class);
     }
 
 

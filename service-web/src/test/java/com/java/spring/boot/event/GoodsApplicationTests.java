@@ -41,9 +41,32 @@ public class GoodsApplicationTests {
     }
 
     @Test
+    public void getMatch() {
+        List<Goods> list = goodsService.getMatch("小米6");
+        System.out.println(JSON.toJSONString(list, SerializerFeature.PrettyFormat));
+    }
+
+    @Test
+    public void getMatchPhrase() {
+        List<Goods> matchPhrase = goodsService.getMatchPhrase("小米");
+        System.out.println(JSON.toJSONString(matchPhrase, SerializerFeature.PrettyFormat));
+    }
+
+    @Test
     public void getBool() {
         List<Goods> list = goodsService.getBoolQuery("小米", 100, "5.9英寸");
         System.out.println(JSON.toJSONString(list, SerializerFeature.PrettyFormat));
+    }
+
+    @Test
+    public void getTerms() {
+        Integer[] stockArr = {100, 200};
+        System.out.println(JSON.toJSONString(goodsService.getTerms(stockArr), SerializerFeature.PrettyFormat));
+    }
+
+    @Test
+    public void getRange() {
+        System.out.println(JSON.toJSONString(goodsService.getRange(100, 200), SerializerFeature.PrettyFormat));
     }
 
 
