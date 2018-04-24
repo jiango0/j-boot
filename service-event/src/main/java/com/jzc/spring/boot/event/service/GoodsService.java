@@ -8,7 +8,7 @@ public interface GoodsService {
 
     void batchGoods(List<Goods> goodsList);
 
-    List<Goods> getTerm(String spec);
+    List<Goods> getTerm(String spec, String name);
 
     List<Goods> getMatch(String name);
 

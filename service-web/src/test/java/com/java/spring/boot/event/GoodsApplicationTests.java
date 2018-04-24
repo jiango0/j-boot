@@ -16,7 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -36,7 +35,7 @@ public class GoodsApplicationTests {
 
     @Test
     public void getTerm() {
-        List<Goods> list = goodsService.getTerm("6.3英寸");
+        List<Goods> list = goodsService.getTerm("5.9英寸",null);
         System.out.println(JSON.toJSONString(list, SerializerFeature.PrettyFormat));
     }
 

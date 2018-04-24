@@ -9,6 +9,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +41,15 @@ public class GoodsServiceImpl implements GoodsService {
      * term 完全匹配才能查询出来
      * 会跟据分词进行查询，如果需要全字段配置就将field设置不分词
      * */
-    public List<Goods> getTerm(String spec) {
+    public List<Goods> getTerm(String spec, String name) {
         BoolQueryBuilder qb = new BoolQueryBuilder();
-        qb.filter(QueryBuilders.termQuery("spec", spec));
+        if(!StringUtils.isEmpty(spec)) {
+            qb.filter(QueryBuilders.termQuery("spec", spec));
+        }
+        if(!StringUtils.isEmpty(name)) {
+            qb.filter(QueryBuilders.termQuery("name", name));
+        }
+
         NativeSearchQuery build = new NativeSearchQueryBuilder().withQuery(qb).build();
 
         return elasticsearchTemplate.queryForList(build, Goods.class);
@@ -53,7 +60,7 @@ public class GoodsServiceImpl implements GoodsService {
      * */
     public List<Goods> getMatch(String name) {
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(QueryBuilders.matchQuery("name", name)).build();
+                .withQuery(QueryBuilders.matchQuery("name", name).operator(MatchQueryBuilder.Operator.AND)).build();
 
         return elasticsearchTemplate.queryForList(searchQuery, Goods.class);
     }
