@@ -16,6 +16,7 @@
 
     <modules>
         <module>service-common</module>
+        <module>service-comment</module>
         <module>service-event</module>
         <module>service-web</module>
     </modules>
