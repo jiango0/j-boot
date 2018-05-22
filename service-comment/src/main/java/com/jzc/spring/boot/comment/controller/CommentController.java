@@ -20,4 +20,9 @@ public class CommentController {
         return ResultEntity.returnSuccess(commentService.save(comment));
     }
 
+    @RequestMapping(value = "get")
+    public ResultEntity<Integer> get(Integer key) {
+        return ResultEntity.returnSuccess(key);
+    }
+
 }
