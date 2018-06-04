@@ -19,6 +19,7 @@
         <module>service-comment</module>
         <module>service-event</module>
         <module>service-web</module>
+        <module>service-basic</module>
     </modules>
 
     <dependencyManagement>

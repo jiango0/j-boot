@@ -1,9 +1,9 @@
 package com.jzc.spring.boot.comment.service.impl;
 
+import com.jzc.spring.boot.comment.dao.mongo.CommentMongoDao;
 import com.jzc.spring.boot.comment.dto.CommentDTO;
 import com.jzc.spring.boot.comment.entity.Comment;
 import com.jzc.spring.boot.comment.service.CommentService;
-import com.jzc.spring.boot.common.dao.mongo.MongodbComponent;
 import com.jzc.spring.boot.common.entity.PageList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,20 +20,20 @@ public class CommentServiceImpl implements CommentService {
     private Logger logger = LoggerFactory.getLogger(CommentServiceImpl.class);
 
     @Autowired
-    private MongodbComponent<Comment> mongodbComponent;
+    private CommentMongoDao commentMongoDao;
 
     @Override
     public Integer save(Comment comment) {
         if(comment.getParentId() == null && comment.getTopId() == null){
             comment.setId(System.currentTimeMillis());
             comment.setTopId(0L);
-            mongodbComponent.insert(comment);
+            commentMongoDao.insert(comment);
             return 1;
         } else {
             Assert.notNull(comment.getTopId(), "父评论ID不能为空");
             Assert.notNull(comment.getParentId(), "被回复评论ID不能为空");
             //通过parentId获取父评论
-            Comment searchComment = mongodbComponent.selectById(comment.getParentId());
+            Comment searchComment = commentMongoDao.findById(comment.getParentId());
             if(searchComment == null){
                 logger.error("searchComment is not =============================================");
             }
@@ -55,7 +55,7 @@ public class CommentServiceImpl implements CommentService {
             Update update = new Update();
             update.push("replyList", comment);
 
-            return mongodbComponent.update(Query.query(Criteria.where("id").is(searchComment.getId())), update, Comment.class);
+            return commentMongoDao.update(Query.query(Criteria.where("id").is(searchComment.getId())), update);
         }
     }
 
