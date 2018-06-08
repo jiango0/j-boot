@@ -3,13 +3,17 @@ package com.jzc.spring.boot.test.reentrant;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ReentrantProcessor {
 
     private Lock lock = new ReentrantLock();
 
-    private Integer i = new Integer(0);
+    private ReadWriteLock rwLock = new ReentrantReadWriteLock(false);
+
+    private Integer i = 0;
 
     private AtomicInteger ai = new AtomicInteger(0);
 
