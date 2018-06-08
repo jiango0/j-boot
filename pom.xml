@@ -20,6 +20,7 @@
         <module>service-event</module>
         <module>service-web</module>
         <module>service-basic</module>
+        <module>service-test</module>
     </modules>
 
     <dependencyManagement>
