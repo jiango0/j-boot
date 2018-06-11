@@ -1,5 +1,6 @@
 package com.jzc.spring.boot.test;
 
+import com.jzc.spring.boot.common.pool.ThreadPoolUtils;
 import com.jzc.spring.boot.test.reentrant.ReentrantProcessor;
 import org.junit.Test;
 
@@ -15,16 +16,12 @@ public class ReentrantProcessorTest {
     }
 
     private void createThread(Runnable runnable) {
-        Thread t1 = new Thread(runnable);
-        Thread t2 = new Thread(runnable);
-        Thread t3 = new Thread(runnable);
-        Thread t4 = new Thread(runnable);
-        Thread t5 = new Thread(runnable);
-        t1.start();
-        t2.start();
-        t3.start();
-        t4.start();
-        t5.start();
+        ThreadPoolUtils.execute(runnable);
+        ThreadPoolUtils.execute(runnable);
+        ThreadPoolUtils.execute(runnable);
+        ThreadPoolUtils.execute(runnable);
+        ThreadPoolUtils.execute(runnable);
+
         this.runSleep();
     }
 
