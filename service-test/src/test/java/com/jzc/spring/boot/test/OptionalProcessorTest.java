@@ -14,7 +14,6 @@ public class OptionalProcessorTest {
     @Test
     public void optionalTest() {
         UserEntity user = createUserEntity();
-        UserEntity user2 = null;
 
         outPrint(
                 Optional.ofNullable(user)
