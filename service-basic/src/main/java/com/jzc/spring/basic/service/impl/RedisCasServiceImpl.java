@@ -20,7 +20,7 @@ public class RedisCasServiceImpl implements RedisCasService {
     @Autowired
     RedisTemplate redisTemplate;
 
-    AtomicInteger failCount = new AtomicInteger();
+    private AtomicInteger failCount = new AtomicInteger();
 
     public void deduction(Long num) {
         String key = "das-num";
@@ -62,7 +62,7 @@ public class RedisCasServiceImpl implements RedisCasService {
 
     }
 
-    public RedisTemplate getRedisTemplate() {
+    private RedisTemplate getRedisTemplate() {
         RedisSerializer stringSerializer = new StringRedisSerializer();
         redisTemplate.setKeySerializer(stringSerializer);
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Long.class);
