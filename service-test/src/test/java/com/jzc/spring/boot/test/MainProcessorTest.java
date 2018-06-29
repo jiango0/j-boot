@@ -34,8 +34,7 @@ public class MainProcessorTest {
 
     @Test
     public void mathRandom() {
-        System.out.println("123");
-        System.out.println("123".toCharArray()[2]);
+        System.out.println(Math.ceil ( (double) 1/2 ));
         System.out.println(Integer.valueOf(1) );
         System.out.println((int) ((Math.random() * 9 + 1) * 10)  );
     }
@@ -43,7 +42,16 @@ public class MainProcessorTest {
     @Test
     public void run() {
         IdGarble id = new IdGarble();
-        System.out.println(id.alternately(id.generateRandom(4), "1" ) );
+        System.out.println(id.alternately(id.generateRandom(4), "100001" ) );
+    }
+
+    @Test
+    public void max() {
+        int max = 1;
+        for(int i=0; i<3; i++) {
+            max = max * 10;
+        }
+        System.out.println(max-1);
     }
 
 }

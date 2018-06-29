@@ -38,6 +38,8 @@ public class OptionalProcessorTest {
                         .orElseThrow(() -> new IllegalArgumentException("map is empty")).get("name")
         );
 
+        System.out.println(Optional.ofNullable(user).map(UserEntity::getAddress).map(AddressEntity::getContext).orElse(null));
+
     }
 
     private void outPrint(Object object) {
@@ -59,7 +61,7 @@ public class OptionalProcessorTest {
         country.setId(System.currentTimeMillis());
         country.setName("武汉");
         address.setId(System.currentTimeMillis());
-        address.setContext("马鹦路兰亭都会");
+        address.setContext("11");
         user.setId(System.currentTimeMillis());
         user.setName("姜志超");
 

@@ -24,29 +24,29 @@ public class IdGarble {
         int batchCount = 0;
 
         for(int i=0; i<count; i++) {
-            if(randomCount > batchCount) {
 
+            if(!this.whetherOdd(i)) {
+                if(randomArr.length > randomCount) {
+                    stringBuffer.append(randomArr[randomCount]);
+                    randomCount++;
+                } else {
+                    stringBuffer.append(batchArr[batchCount]);
+                    batchCount++;
+                }
+            } else {
+                if(batchArr.length > batchCount ) {
+                    stringBuffer.append(batchArr[batchCount]);
+                    batchCount++;
+                } else {
+                    stringBuffer.append(randomArr[randomCount]);
+                    randomCount++;
+                }
             }
-            if(!this.whetherOdd(i) && randomArr.length > randomCount) {
-                stringBuffer.append(randomArr[randomCount]);
-                randomCount++;
-                continue;
-            }
-            if(batchArr.length > batchCount ) {
-                stringBuffer.append(batchArr[batchCount]);
-                batchCount++;
-            }
+
         }
+
         return stringBuffer.toString();
     }
-
-//    private int[] intToArray(String num) {
-//        int[] intArray = new int[num.length()];
-//        for(int i=0; i<num.length();i++) {
-//            char[] chars = num.toCharArray();
-//
-//        }
-//    }
 
     public int generateRandom(int randomDigit) {
         int length = 1;
