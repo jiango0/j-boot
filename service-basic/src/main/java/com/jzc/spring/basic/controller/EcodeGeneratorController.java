@@ -1,10 +1,15 @@
 package com.jzc.spring.basic.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.toonyoo.common.ecodegenerator.service.EcodeGeneratorServcie;
+import com.jzc.spring.basic.service.EcodeGenService;
+import com.jzc.spring.basic.service.EcodeService;
+import com.toonyoo.common.ecodegenerator.scan.EcodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.core.BoundZSetOperations;
+import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -16,27 +21,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class EcodeGeneratorController {
 
     @Autowired
-    EcodeGeneratorServcie ecodeGeneratorServcie;
+    EcodeService ecodeService;
 
     @Autowired
     RedisTemplate redisTemplate;
 
     @RequestMapping(value = "getCodeSeq")
     public String getCodeSeq() {
-        int randomSize = 4;
-        int seqSize = 4;
-        int oddSize = 0;
-        String code = ecodeGeneratorServcie.getCode("jzc", randomSize, seqSize, 100);
-
+        int randomSize = 1;
+        String codePattern = "RRRR123456";
+        String code = ecodeService.getCode("jzc", codePattern);
         StringBuffer stringBuffer = new StringBuffer();
         char[] chars = code.toCharArray();
-        for(int i=0; i<code.length(); i++) {
-            if( !this.whetherOdd(i) && oddSize < randomSize ) {
-                oddSize++;
-                continue;
-            }
-            stringBuffer.append(chars[i]);
+        int i = 1;
+        while (codePattern.indexOf(String.valueOf(i)) != -1 ) {
+            stringBuffer.append(chars[codePattern.indexOf(String.valueOf(i))]);
+            i++;
         }
+
         System.out.println(stringBuffer.toString());
 
         RedisTemplate template = this.getRedisTemplate();
@@ -45,7 +47,13 @@ public class EcodeGeneratorController {
             @Override
             public Long execute(RedisOperations redisOperations) throws DataAccessException {
                 BoundZSetOperations boundZSetOperations = redisOperations.boundZSetOps("code_zset");
-                boundZSetOperations.add(Long.valueOf(code), new Double(stringBuffer.toString()) );
+                Boolean addFlag = boundZSetOperations.add(Long.valueOf(code), new Double(stringBuffer.toString()));
+
+                if(!addFlag) {
+                    BoundZSetOperations failOperations = redisOperations.boundZSetOps("code_zset_fail");
+                    failOperations.add(Long.valueOf(code), new Double(stringBuffer.toString()));
+                }
+
                 return null;
             }
 

@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @EnableAsync
 @SpringBootApplication(scanBasePackages={"com.jzc.spring.basic", "com.toonyoo.common"})
-@MapperScan("com.toonyoo.common.sequence.dao")
+@MapperScan("com.toonyoo.common.*")
 public class BasicApplication {
 
     public static void main(String[] args) {
