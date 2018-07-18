@@ -21,6 +21,7 @@
         <module>service-web</module>
         <module>service-basic</module>
         <module>service-test</module>
+        <module>service-consul</module>
     </modules>
 
     <dependencyManagement>
@@ -31,6 +32,13 @@
                 <version>${jzc.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!-- servlet、jsp setting -->
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -109,7 +117,6 @@
         </dependencies>
     </dependencyManagement>
 
-
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -170,6 +177,7 @@
         <google.guava>18.0</google.guava>
         <google.gson>2.8.0</google.gson>
         <nekohtml.version>1.9.22</nekohtml.version>
+        <spring-cloud.version>Dalston.RELEASE</spring-cloud.version>
 
         <jzc.version>1.0-SNAPSHOT</jzc.version>
 
