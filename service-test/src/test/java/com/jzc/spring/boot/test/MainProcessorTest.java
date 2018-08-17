@@ -4,10 +4,7 @@ import com.jzc.spring.boot.test.garble.IdGarble;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class MainProcessorTest {
 
@@ -166,6 +163,16 @@ public class MainProcessorTest {
     @Test
     public void whetherOddTest() {
         System.out.println(new IdGarble().whetherOdd(2));
+    }
+
+    Map<String, String> letter = new HashMap<String, String>(){{
+        put("A", "10");put("B", "11");put("C", "12");put("D", "13");put("E", "14");put("F", "15");put("G", "16");put("H", "17");put("I", "18");
+    }};
+
+    @Test
+    public void sort() {
+
+
     }
 
 }
