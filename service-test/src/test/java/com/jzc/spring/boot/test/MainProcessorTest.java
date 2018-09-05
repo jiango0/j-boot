@@ -175,4 +175,9 @@ public class MainProcessorTest {
 
     }
 
+    @Test
+    public void bigDecmailNull() {
+        System.out.println( BigDecimal.ZERO.equals(null) );
+    }
+
 }
