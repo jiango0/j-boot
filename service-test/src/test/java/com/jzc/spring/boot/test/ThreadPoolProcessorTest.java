@@ -35,7 +35,7 @@ public class ThreadPoolProcessorTest {
             });
         }
 
-        Thread.sleep(10000);
+        Thread.sleep(11000);
     }
 
 }

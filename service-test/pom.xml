@@ -41,6 +41,12 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>toonyoo.utils</groupId>
+            <artifactId>utils</artifactId>
+            <version>1.1.6</version>
+        </dependency>
+
         <!--<dependency>-->
             <!--<groupId>junit</groupId>-->
             <!--<artifactId>junit</artifactId>-->
