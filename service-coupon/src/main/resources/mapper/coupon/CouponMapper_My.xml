@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jzc.spring.coupon.dao.coupon.CouponMapper_My" >
+
+  <select id="selectCustomersCoupon" resultType="com.jzc.spring.coupon.model.CustomersCoupon">
+    select *
+    from customers_coupon
+    where date_activation &gt;= #{start}
+    and date_activation &lt;= #{end}
+    and partner_id = #{partner_id}
+    order by date_activation asc
+  </select>
+
+  <select id="selectCouponByIds" resultType="com.jzc.spring.coupon.model.Coupon">
+    select *
+    from coupon
+    where id in
+    <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+
+  <select id="selectCouponConsumeByIds" resultType="com.jzc.spring.coupon.model.CouponConsume">
+    select *
+    from coupon_consume
+    where coupon_code in
+    <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+
+</mapper>

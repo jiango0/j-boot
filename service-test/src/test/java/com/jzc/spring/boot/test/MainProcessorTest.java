@@ -1,5 +1,6 @@
 package com.jzc.spring.boot.test;
 
+import com.alibaba.fastjson.JSON;
 import com.jzc.spring.boot.test.garble.IdGarble;
 import org.junit.Test;
 
@@ -179,5 +180,35 @@ public class MainProcessorTest {
     public void bigDecmailNull() {
         System.out.println( BigDecimal.ZERO.equals(null) );
     }
+
+    @Test
+    public void integralTest() {
+        System.out.println( new BigDecimal("255").setScale(0, BigDecimal.ROUND_HALF_UP) );
+        System.out.println( new BigDecimal("255").setScale(0, BigDecimal.ROUND_HALF_UP).intValue() );
+    }
+
+    @Test
+    public void integerNull() {
+        System.out.println( Integer.valueOf(0) == null );
+    }
+
+    @Test
+    public void integerEwq() {
+        System.out.println( 130 == Integer.valueOf(130) );
+    }
+
+    @Test
+    public void listsub() {
+        List<Integer> list = new ArrayList<>();
+        list.add(0);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        System.out.println(JSON.toJSONString(list.subList(1, 4)));
+    }
+
 
 }
