@@ -5,6 +5,7 @@ import com.jzc.spring.boot.test.garble.IdGarble;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MainProcessorTest {
@@ -208,6 +209,19 @@ public class MainProcessorTest {
         list.add(5);
 
         System.out.println(JSON.toJSONString(list.subList(1, 4)));
+    }
+
+    @Test
+    public void getDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2020);
+        calendar.set(Calendar.MONTH, 1);
+        calendar.set(Calendar.DAY_OF_MONTH, 29);
+        System.out.println( sdf.format(calendar.getTime()) );
+
+        calendar.add(Calendar.YEAR, -1);
+        System.out.println( sdf.format(calendar.getTime()) );
     }
 
 
