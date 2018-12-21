@@ -24,6 +24,7 @@
         <module>service-consul</module>
         <module>service-integral-supplement</module>
         <module>service-coupon</module>
+        <module>service-generate</module>
     </modules>
 
     <dependencyManagement>
