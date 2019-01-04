@@ -25,6 +25,7 @@
         <module>service-integral-supplement</module>
         <module>service-coupon</module>
         <module>service-generate</module>
+        <module>service-statistics</module>
     </modules>
 
     <dependencyManagement>
