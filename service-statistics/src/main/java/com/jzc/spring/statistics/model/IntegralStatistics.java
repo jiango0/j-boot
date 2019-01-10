@@ -12,13 +12,13 @@ public class IntegralStatistics extends GenericEntity {
 
     private String address;
 
-    private Integer num;
+    private Long num;
 
-    private Integer v1_num;
+    private Long v1_num;
 
-    private Integer v2_num;
+    private Long v2_num;
 
-    private Integer v3_num;
+    private Long v3_num;
 
     private Date create_time;
 
@@ -48,35 +48,35 @@ public class IntegralStatistics extends GenericEntity {
         this.address = address;
     }
 
-    public Integer getNum() {
+    public Long getNum() {
         return num;
     }
 
-    public void setNum(Integer num) {
+    public void setNum(Long num) {
         this.num = num;
     }
 
-    public Integer getV1_num() {
+    public Long getV1_num() {
         return v1_num;
     }
 
-    public void setV1_num(Integer v1_num) {
+    public void setV1_num(Long v1_num) {
         this.v1_num = v1_num;
     }
 
-    public Integer getV2_num() {
+    public Long getV2_num() {
         return v2_num;
     }
 
-    public void setV2_num(Integer v2_num) {
+    public void setV2_num(Long v2_num) {
         this.v2_num = v2_num;
     }
 
-    public Integer getV3_num() {
+    public Long getV3_num() {
         return v3_num;
     }
 
-    public void setV3_num(Integer v3_num) {
+    public void setV3_num(Long v3_num) {
         this.v3_num = v3_num;
     }
 

@@ -224,5 +224,11 @@ public class MainProcessorTest {
         System.out.println( sdf.format(calendar.getTime()) );
     }
 
+    @Test
+    public void mathFloor() {
+        System.out.println(501/500);
+        System.out.println(Math.floor(23/500));
+    }
+
 
 }
