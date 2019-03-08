@@ -2,7 +2,7 @@ package com.jzc.spring.boot.test;
 
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
-import com.alibaba.druid.sql.dialect.postgresql.visitor.PGSchemaStatVisitor;
+import com.alibaba.druid.sql.dialect.postgresql.visitor.*;
 import com.alibaba.druid.stat.TableStat;
 import com.alibaba.druid.util.JdbcConstants;
 import com.alibaba.fastjson.JSON;
@@ -32,12 +32,12 @@ public class SQLTest {
             "left join order_promotion op on oi.order_code = op.order_code " +
             "where oa.order_code = 'BG3FED01957688411' ";
 
-    private String sql2 = "select level ll, name, parentId, status from t_areainfo";
+    private String sql2 = "select level as ll, name, parentId, status from t_areainfo";
 
     @Test
     public void sql() {
 
-        String dbType = JdbcConstants.POSTGRESQL;
+        String dbType = JdbcConstants.MYSQL;
 
         String format = SQLUtils.format(sql2, dbType);
         System.out.println("format ：");
@@ -52,6 +52,23 @@ public class SQLTest {
             PGSchemaStatVisitor visitor = new PGSchemaStatVisitor();
             stmt.accept(visitor);
             Map<String, String> aliasmap = visitor.getAliasMap();
+
+            PGASTVisitorAdapter v1 = new PGASTVisitorAdapter();
+            stmt.accept(v1);
+
+            PGEvalVisitor v2 = new PGEvalVisitor();
+            stmt.accept(v2);
+
+            PGExportParameterVisitor v3 = new PGExportParameterVisitor();
+            stmt.accept(v3);
+
+            PGParameterizedOutputVisitor v5 = new PGParameterizedOutputVisitor();
+            stmt.accept(v5);
+
+            PGSchemaStatVisitor v6 = new PGSchemaStatVisitor();
+            stmt.accept(v6);
+
+
 
             for (Iterator iterator = aliasmap.keySet().iterator(); iterator.hasNext();) {
                 String key = iterator.next().toString();
@@ -75,7 +92,6 @@ public class SQLTest {
             System.out.println("Manipulation : " + visitor.getTables());
             //获取字段名称
             System.out.println("fields : " + visitor.getColumns());
-
 
         }
 
