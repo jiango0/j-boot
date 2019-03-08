@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MainProcessorTest {
 
@@ -228,6 +229,63 @@ public class MainProcessorTest {
     public void mathFloor() {
         System.out.println(501/500);
         System.out.println(Math.floor(23/500));
+    }
+
+    @Test
+    public void bigdecimalTest() {
+        BigDecimal price = new BigDecimal("1.3");
+        BigDecimal amount = new BigDecimal(100);
+
+        BigDecimal down = amount.divide(price, 0, BigDecimal.ROUND_DOWN);
+        System.out.println(down);
+
+        BigDecimal multiply = down.multiply(price).setScale(0, BigDecimal.ROUND_DOWN);
+        System.out.println(multiply);
+
+    }
+
+    @Test
+    public void steamMap() {
+
+        List<Map<String, Integer>> list = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<>();
+        map.put("1", 1);
+        list.add(map);
+
+        OptionalInt first = list.stream().mapToInt(m -> m.get("1")).findFirst();
+
+        System.out.println(first.orElse(0));
+
+    }
+
+    @Test
+    public void discountTest() {
+
+        BigDecimal discount = new BigDecimal(7.8);
+
+        Integer ticket = 1333;
+
+        BigDecimal bigDecimal = discount.multiply(BigDecimal.valueOf(1333)).setScale(0, BigDecimal.ROUND_UP);
+
+        System.out.println( bigDecimal );
+
+    }
+
+    @Test
+    public void foreach() {
+        List<String> list = new ArrayList<String>(){{
+            add("1");
+            add("1");
+            add("2");
+        }};
+
+        List<String> collect = list.stream().map(s -> {
+
+            return s;
+        }).distinct().collect(Collectors.toList());
+
+        System.out.println(JSON.toJSON(collect));
+
     }
 
 

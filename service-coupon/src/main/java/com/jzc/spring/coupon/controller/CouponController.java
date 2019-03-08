@@ -3,6 +3,9 @@ package com.jzc.spring.coupon.controller;
 import com.jzc.spring.coupon.constant.PartnerMap;
 import com.jzc.spring.coupon.model.CouponExcel;
 import com.jzc.spring.coupon.service.CouponService;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -143,17 +146,17 @@ public class CouponController {
             }
 
 //            fs = new FileInputStream(file);
-            XSSFWorkbook workbook = new XSSFWorkbook();
+            SXSSFWorkbook workbook = new SXSSFWorkbook();
             out = new FileOutputStream(file);
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            XSSFSheet sheetAt = null;
+            SXSSFSheet sheetAt = null;
             int h = 0;
             for(int i=0; i<couponExcel.size(); i++) {
                 if(i == 0 || i == 11 || i == 21) {
                     sheetAt = workbook.createSheet(this.sheetName(i));
                     h = 0;
-                    XSSFRow row = sheetAt.createRow(h);
+                    SXSSFRow row = sheetAt.createRow(h);
                     row.createCell(0).setCellValue("顾客名称");
                     row.createCell(1).setCellValue("customer_id");
                     row.createCell(2).setCellValue("优惠券名称");
@@ -168,7 +171,7 @@ public class CouponController {
                 }
                 List<CouponExcel> couponExcelList = couponExcel.get(i);
                 for(CouponExcel couponExcel1 : couponExcelList) {
-                    XSSFRow row = sheetAt.createRow(h);
+                    SXSSFRow row = sheetAt.createRow(h);
 
                     row.createCell(0).setCellValue(couponExcel1.getCustomerName() == null ? "" : couponExcel1.getCustomerName() );
                     row.createCell(1).setCellValue(couponExcel1.getCustomerId() == null ? "" : couponExcel1.getCustomerId());
