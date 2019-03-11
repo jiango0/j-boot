@@ -34,16 +34,18 @@ public class SQLTest {
 
     private String sql2 = "select level as ll, name, parentId, status from t_areainfo";
 
+    private String sql3 = "select t1.1 as 1, t1.2   2  , (select * from t4) tc, (select * from t4) t, t2.4 from t1 , (select * from t2) t2, (select * from t3) t3 where t1.1 = 1";
+
     @Test
     public void sql() {
 
         String dbType = JdbcConstants.MYSQL;
 
-        String format = SQLUtils.format(sql2, dbType);
+        String format = SQLUtils.format(sql, dbType);
         System.out.println("format ：");
         System.out.println(format);
 
-        List<SQLStatement> stmtList = SQLUtils.parseStatements(sql2, dbType);
+        List<SQLStatement> stmtList = SQLUtils.parseStatements(sql, dbType);
         System.out.println("stmtList:" + JSON.toJSONString(stmtList));
         System.out.println("stmtList size:" + stmtList.size());
         for (int i = 0; i < stmtList.size(); i++) {
@@ -94,6 +96,44 @@ public class SQLTest {
             System.out.println("fields : " + visitor.getColumns());
 
         }
+
+    }
+
+    @Test
+    public void analyzeSql () {
+        int index = sql3.length() -1;
+        while (sql3.lastIndexOf("from", index -1) != -1) {
+            index = sql3.lastIndexOf("from", index -1);
+            int l = sql3.lastIndexOf("(", index);
+            int r = sql3.lastIndexOf(")", index);
+
+            if (l != -1 && r != -1 && l - r > 0) {
+                continue;
+            } else if (l != -1  && r == -1) {
+                continue;
+            }
+
+            break;
+        }
+
+        String[] columnArr = sql3.substring(6, index).split("[,]");
+        for(String column : columnArr) {
+            column = column.trim();
+            System.out.println("column : " + column);
+
+            if (column.contains("as")) {
+                String[] as = column.split("as");
+                System.out.println("as : " + as[as.length -1]);
+            }
+
+            if (column.contains(" ")) {
+                String[] split = column.split(" ");
+                System.out.println("space : " + split[split.length -1]);
+            }
+
+        }
+
+        System.out.println(sql3.substring(6, index));
 
     }
 
