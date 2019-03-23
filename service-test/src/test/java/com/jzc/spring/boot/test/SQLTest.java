@@ -24,15 +24,15 @@ public class SQLTest {
             "oi.order_item_code, " +
             "oi.item_name, " +
             "op.promotion_code, " +
-            "op.promotion_fee, " +
-            "sum(op.promotion_fee), " +
+            "op.promotion_fee pf, " +
+            "sum(op.promotion_fee) ss, " +
             "count(1) " +
             "from orders oa " +
             "left join order_item oi on oa.order_code = oi.order_code " +
             "left join order_promotion op on oi.order_code = op.order_code " +
             "where oa.order_code = 'BG3FED01957688411' ";
 
-    private String sql2 = "select level as ll, name, parentId, status from t_areainfo";
+    private String sql2 = "select level ll, name, parentId, status from t_areainfo ta";
 
     private String sql3 = "select t1.1 as 1, t1.2   2  , (select * from t4) tc, (select * from t4) t, t2.4 from t1 , (select * from t2) t2, (select * from t3) t3 where t1.1 = 1";
 
@@ -41,11 +41,11 @@ public class SQLTest {
 
         String dbType = JdbcConstants.MYSQL;
 
-        String format = SQLUtils.format(sql, dbType);
+        String format = SQLUtils.format(sql2, dbType);
         System.out.println("format ：");
         System.out.println(format);
 
-        List<SQLStatement> stmtList = SQLUtils.parseStatements(sql, dbType);
+        List<SQLStatement> stmtList = SQLUtils.parseStatements(sql2, dbType);
         System.out.println("stmtList:" + JSON.toJSONString(stmtList));
         System.out.println("stmtList size:" + stmtList.size());
         for (int i = 0; i < stmtList.size(); i++) {

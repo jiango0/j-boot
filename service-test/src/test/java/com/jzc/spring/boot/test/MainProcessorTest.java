@@ -288,5 +288,39 @@ public class MainProcessorTest {
 
     }
 
+    @Test
+    public void bigDecimalCompare () {
+        BigDecimal amount = new BigDecimal(-1);
+        System.out.println( BigDecimal.ZERO.compareTo(amount));
+        System.out.println(BigDecimal.ZERO.compareTo(amount) > -1);
+
+    }
+
+    @Test
+    public void bigDeciamlQUMO () {
+        BigDecimal price = new BigDecimal("0.01");
+        BigDecimal amount = new BigDecimal(100);
+
+
+        System.out.println(amount.divide(price, 0, BigDecimal.ROUND_DOWN));
+
+        System.out.println(100/0.01);
+
+        BigDecimal[] bigDecimals = amount.divideAndRemainder(price);
+
+        System.out.println(bigDecimals.length);
+        System.out.println(bigDecimals[0]);
+        System.out.println(bigDecimals[1]);
+
+    }
+
+    @Test
+    public void bigdecimalXS () {
+        BigDecimal bd = new BigDecimal("1.1");
+
+        System.out.print(BigDecimal.valueOf(bd.intValue()).compareTo(bd) == 0);
+
+    }
+
 
 }
