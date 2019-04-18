@@ -4,6 +4,7 @@ import com.jzc.spring.boot.common.web.ResultEntity;
 import com.jzc.spring.es.high.entity.ESHighEntity;
 import com.jzc.spring.es.high.service.ESHighService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ public class ESHighController {
     private ESHighService esHighService;
 
     @RequestMapping(value = "batch")
-    public ResultEntity batch(List<ESHighEntity> list) {
+    public ResultEntity batch(@RequestBody List<ESHighEntity> list) {
         return ResultEntity.returnSuccess(esHighService.batch(list));
     }
 
