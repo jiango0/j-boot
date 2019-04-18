@@ -14,6 +14,8 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.util.ArrayList;
+
 @Service
 public class CommentServiceImpl implements CommentService {
 
@@ -25,7 +27,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Integer save(Comment comment) {
         if(comment.getParentId() == null && comment.getTopId() == null){
-            comment.setId(System.currentTimeMillis());
+//            comment.setId(System.currentTimeMillis());
             comment.setTopId(0L);
             commentMongoDao.insert(comment);
             return 1;
@@ -50,7 +52,7 @@ public class CommentServiceImpl implements CommentService {
                 }
             }
             comment.setTargetUserId(searchComment.getCreateUserId());//目标回复用户ID
-            comment.setId(System.currentTimeMillis());
+//            comment.setId(System.currentTimeMillis());
 
             Update update = new Update();
             update.push("replyList", comment);

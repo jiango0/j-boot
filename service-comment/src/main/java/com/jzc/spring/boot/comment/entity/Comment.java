@@ -4,7 +4,9 @@ import com.jzc.spring.boot.common.entity.GenericEntity;
 
 import java.util.List;
 
-public class Comment extends GenericEntity {
+public class Comment  {
+
+    private String id;
 
     private Long infoId;
 
@@ -31,6 +33,14 @@ public class Comment extends GenericEntity {
     private Long lastUpdateDate;
 
     private List<Comment> replyList;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Long getInfoId() {
         return infoId;

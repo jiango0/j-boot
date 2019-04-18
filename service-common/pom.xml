@@ -10,13 +10,6 @@
     </parent>
 
     <artifactId>service-common</artifactId>
-    <name>service-common</name>
-    <url>http://maven.apache.org</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <com.google.zxing.version>3.2.0</com.google.zxing.version>
-    </properties>
 
     <dependencies>
         <!--  spring  -->
@@ -96,11 +89,11 @@
         <!--</dependency>-->
 
         <!-- 二维码工具引用 -->
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>javase</artifactId>
-            <version>${com.google.zxing.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.google.zxing</groupId>-->
+            <!--<artifactId>javase</artifactId>-->
+            <!--<version>${com.google.zxing.version}</version>-->
+        <!--</dependency>-->
 
 
         <!--<dependency>-->
@@ -110,4 +103,5 @@
         <!--</dependency>-->
 
     </dependencies>
+
 </project>

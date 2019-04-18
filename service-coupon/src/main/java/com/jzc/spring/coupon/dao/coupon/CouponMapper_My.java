@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface CouponMapper_My {
 
-    List<CustomersCoupon> selectCustomersCoupon(@Param("start") Date start, @Param("end") Date end, @Param("partner_id") String partner_id);
+    List<CustomersCoupon> selectCustomersCoupon(@Param("start") Date start, @Param("end") Date end, @Param("partner_id") String partner_id, @Param("dateType") Integer dateType);
 
     List<Coupon> selectCouponByIds(@Param("ids") List<String> ids);
 

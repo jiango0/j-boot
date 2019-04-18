@@ -26,6 +26,9 @@
         <module>service-coupon</module>
         <module>service-generate</module>
         <module>service-statistics</module>
+        <module>service-monitor</module>
+        <module>service-ali-es</module>
+        <module>service-ali-es-high</module>
     </modules>
 
     <dependencyManagement>
@@ -133,12 +136,6 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.16.10</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>4.5</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->

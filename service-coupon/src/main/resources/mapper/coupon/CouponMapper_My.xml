@@ -5,9 +5,15 @@
   <select id="selectCustomersCoupon" resultType="com.jzc.spring.coupon.model.CustomersCoupon">
     select *
     from customers_coupon
-    where date_activation &gt;= #{start}
-    and date_activation &lt;= #{end}
-    and partner_id = #{partner_id}
+    where partner_id = #{partner_id}
+    <if test="dateType == 1 and start != null and end != null">
+      and date_activation &gt;= #{start}
+      and date_activation &lt;= #{end}
+    </if>
+    <if test="dateType == 2 and start != null and end != null">
+      and date_consume &gt;= #{start}
+      and date_consume &lt;= #{end}
+    </if>
     order by date_activation asc
   </select>
 

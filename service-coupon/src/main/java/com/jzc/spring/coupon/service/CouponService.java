@@ -18,12 +18,12 @@ public class CouponService {
     @Autowired
     OrderMapper orderMapper;
 
-    public List<CouponExcel> selectCustomerCoupon(Date start, Date end, String partner_id ) {
+    public List<CouponExcel> selectCustomerCoupon(Date start, Date end, String partner_id, Integer dateType) {
         List<CouponExcel> list = new ArrayList<>();
         List<String> couponIds = new ArrayList<>();
         List<String> couponCodes = new ArrayList<>();
 
-        List<CustomersCoupon> customersCoupons = couponMapper_my.selectCustomersCoupon(start, end, partner_id);
+        List<CustomersCoupon> customersCoupons = couponMapper_my.selectCustomersCoupon(start, end, partner_id, dateType);
         if(!CollectionUtils.isEmpty(customersCoupons)) {
             customersCoupons.forEach(customersCoupon -> {
                 if(!couponIds.contains(customersCoupon.getCoupon_id())) {

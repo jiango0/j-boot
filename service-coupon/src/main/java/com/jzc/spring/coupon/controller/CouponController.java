@@ -34,14 +34,14 @@ public class CouponController {
     CouponService couponService;
 
     @RequestMapping(value = "/selectCustomerCoupon")
-    public List<CouponExcel> selectCustomerCoupon(String startString, String endString, String partner_id) throws ParseException {
+    public List<CouponExcel> selectCustomerCoupon(String startString, String endString, String partner_id, Integer dateType) throws ParseException {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date start = sdf.parse(startString);
         Date end = sdf.parse(endString);
         int days = this.diffDays(start, end);
         //获取数据
-        List<List<CouponExcel>> couponExcel = this.getCouponExcel(start, days, partner_id);
+        List<List<CouponExcel>> couponExcel = this.getCouponExcel(start, days, partner_id, dateType);
 
         Integer month = null;
         int startIndex = 0;
@@ -49,7 +49,12 @@ public class CouponController {
             List<CouponExcel> couponExcelList = couponExcel.get(i);
             if(!CollectionUtils.isEmpty(couponExcelList)) {
                 CouponExcel couponExcel1 = couponExcelList.get(0);
-                Date first = couponExcel1.getDate_activation();
+                Date first = null;
+                if (dateType == 1) {
+                    first = couponExcel1.getDate_activation();
+                } if (dateType == 2) {
+                    first = couponExcel1.getDate_consume();
+                }
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(first);
                 int currentMonth = calendar.get(Calendar.MONTH);
@@ -59,7 +64,7 @@ public class CouponController {
                 }
                 if(month != currentMonth ) {
                     logger.info("month ->" + month);
-                    this.exportExcel(couponExcel.subList(startIndex, i), month, partner_id);
+                    this.exportExcel(couponExcel.subList(startIndex, i), month, partner_id, dateType);
                     startIndex = i;
                     month = currentMonth;
                 }
@@ -70,7 +75,7 @@ public class CouponController {
                     month = 0;
                 }
                 logger.info("last month ->" + month);
-                this.exportExcel(couponExcel.subList(startIndex, i+1), month, partner_id);
+                this.exportExcel(couponExcel.subList(startIndex, i+1), month, partner_id, dateType);
             }
         }
 
@@ -108,7 +113,7 @@ public class CouponController {
         return null;
     }
 
-    private List<List<CouponExcel>> getCouponExcel(Date start, int days, String partner_id) throws ParseException {
+    private List<List<CouponExcel>> getCouponExcel(Date start, int days, String partner_id, Integer dateType) throws ParseException {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(start);
         List<List<CouponExcel>> list = new ArrayList<>();
@@ -124,19 +129,19 @@ public class CouponController {
             calendar.set(Calendar.SECOND, 59);
             Date endDate = calendar.getTime();
 
-            list.add(couponService.selectCustomerCoupon(startDate, endDate, partner_id));
+            list.add(couponService.selectCustomerCoupon(startDate, endDate, partner_id, dateType));
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
         return list;
     }
 
-    private void exportExcel(List<List<CouponExcel>> couponExcel, int month, String partner_id) {
+    private void exportExcel(List<List<CouponExcel>> couponExcel, int month, String partner_id, Integer dateType) {
         FileInputStream fs = null;
         FileOutputStream out = null;
         String fileName = "";
         try {
-            fileName = "D:\\data_excel\\coupon\\"+ PartnerMap.getPartnerName(partner_id) + (month+1) + "月.xlsx";
+            fileName = "D:\\data_excel\\coupon\\"+ PartnerMap.getPartnerName(partner_id) + (month+1) + "月_" + dateType + ".xlsx";
             File file = new File(fileName);
             if(!file.exists()) {
                 file.createNewFile();
