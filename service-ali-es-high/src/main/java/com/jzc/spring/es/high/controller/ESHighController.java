@@ -23,8 +23,13 @@ public class ESHighController {
     }
 
     @RequestMapping(value = "query")
-    public ResultEntity query(ESHighEntity entity) {
+    public ResultEntity query(@RequestBody ESHighEntity entity) {
         return ResultEntity.returnSuccess(esHighService.query(entity));
+    }
+
+    @RequestMapping(value = "multiQuery")
+    public ResultEntity multiQuery(@RequestBody ESHighEntity entity) {
+        return ResultEntity.returnSuccess(esHighService.multiQuery(entity));
     }
 
 }

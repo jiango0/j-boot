@@ -29,6 +29,7 @@
         <module>service-monitor</module>
         <module>service-ali-es</module>
         <module>service-ali-es-high</module>
+        <module>service-cmb</module>
     </modules>
 
     <dependencyManagement>

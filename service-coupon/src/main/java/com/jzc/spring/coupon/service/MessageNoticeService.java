@@ -317,7 +317,7 @@ public class MessageNoticeService {
         ps.put("5E075ECA-A111-40FA-9939-B772F90B0559", "5A018984-B053-4C59-AE83-A5277A7349EB");
     }
 
-    @Autowired
+//    @Autowired
     MessageNoticeRecordMapper messageNoticeRecordMapper;
 
     @Autowired

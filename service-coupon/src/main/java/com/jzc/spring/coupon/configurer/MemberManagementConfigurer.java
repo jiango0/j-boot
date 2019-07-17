@@ -13,8 +13,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
-@Configuration
-@MapperScan(basePackages = "com.jzc.spring.coupon.dao.member", sqlSessionFactoryRef = "memberSqlSessionFactory")
+//@Configuration
+//@MapperScan(basePackages = "com.jzc.spring.coupon.dao.member", sqlSessionFactoryRef = "memberSqlSessionFactory")
 public class MemberManagementConfigurer {
 
     @Bean(name = "memberDataSource")

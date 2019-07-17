@@ -42,6 +42,13 @@ public class OptionalProcessorTest {
 
     }
 
+    public void optionalNullTest() {
+        String a = "";
+        String b = "";
+        String c = "1";
+
+    }
+
     private void outPrint(Object object) {
         System.out.println(object);
     }
