@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jzc.spring.boot.transfer.dao.basicpay.PaymentChargesDAO">
+    <resultMap id="paymentChargesResult" type="com.jzc.spring.boot.transfer.domain.PaymentCharges">
+        <result property="paymentChagesId" column="payment_chages_id" jdbcType="VARCHAR"/>
+        <result property="txId" column="tx_id" jdbcType="VARCHAR"/>
+        <result property="merchantId" column="merchant_id" jdbcType="VARCHAR"/>
+        <result property="shopId" column="shop_id" jdbcType="VARCHAR"/>
+        <result property="orderChannel" column="order_channel" jdbcType="INTEGER"/>
+        <result property="accountId" column="account_id" jdbcType="VARCHAR"/>
+        <result property="outTradeNo" column="out_trade_no" jdbcType="VARCHAR"/>
+        <result property="orderCode" column="order_code" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="payProvider" column="pay_provider" jdbcType="INTEGER"/>
+        <result property="payChannel" column="pay_channel" jdbcType="INTEGER"/>
+        <result property="payType" column="pay_type" jdbcType="INTEGER"/>
+        <result property="subject" column="subject" jdbcType="VARCHAR"/>
+        <result property="payStatus" column="pay_status" jdbcType="INTEGER"/>
+        <result property="amount" column="amount" jdbcType="DECIMAL"/>
+        <result property="discount" column="discount" jdbcType="DECIMAL"/>
+        <result property="fee" column="fee" jdbcType="DECIMAL"/>
+        <result property="oddChange" column="odd_change" jdbcType="DECIMAL"/>
+        <result property="cancelType" column="cancel_type" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="billTime" column="bill_time" jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="checkStatus" column="check_status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="commonColumns">
+	    <![CDATA[
+
+                    payment_charges.payment_chages_id ,
+                    payment_charges.tx_id ,
+                    payment_charges.merchant_id ,
+                    payment_charges.shop_id ,
+                    payment_charges.order_channel ,
+                    payment_charges.account_id ,
+                    payment_charges.out_trade_no ,
+                    payment_charges.order_code ,
+                    payment_charges.user_id ,
+                    payment_charges.pay_provider ,
+                    payment_charges.pay_channel ,
+                    payment_charges.pay_type ,
+                    payment_charges.subject ,
+                    payment_charges.pay_status ,
+                    payment_charges.amount ,
+                    payment_charges.discount ,
+                    payment_charges.fee ,
+                    payment_charges.odd_change ,
+                    payment_charges.cancel_type ,
+                    payment_charges.created_at ,
+                    payment_charges.updated_at ,
+                    payment_charges.bill_time ,
+                    payment_charges.remark,
+                    payment_charges.check_status
+
+        ]]>
+	</sql>
+
+    <insert id="insert" parameterType="com.jzc.spring.boot.transfer.domain.PaymentCharges">
+    <![CDATA[
+
+                INSERT INTO
+                payment_charges (
+                    payment_chages_id ,
+                    tx_id ,
+                    merchant_id ,
+                    shop_id ,
+                    order_channel,
+                    account_id ,
+                    out_trade_no ,
+                    order_code ,
+                    user_id ,
+                    pay_provider ,
+                    pay_channel ,
+                    pay_type ,
+                    subject ,
+                    pay_status ,
+                    amount ,
+                    discount ,
+                    fee ,
+                    odd_change ,
+                    cancel_type ,
+                    created_at ,
+                    updated_at ,
+                    bill_time ,
+                    remark,
+                    check_status
+                ) VALUES (
+                    #{paymentChagesId, jdbcType=VARCHAR} ,
+                    #{txId, jdbcType=VARCHAR} ,
+                    #{merchantId, jdbcType=VARCHAR} ,
+                    #{shopId, jdbcType=VARCHAR} ,
+                    #{orderChannel, jdbcType=INTEGER} ,
+                    #{accountId, jdbcType=VARCHAR} ,
+                    #{outTradeNo, jdbcType=VARCHAR} ,
+                    #{orderCode, jdbcType=VARCHAR} ,
+                    #{userId, jdbcType=VARCHAR} ,
+                    #{payProvider, jdbcType=INTEGER} ,
+                    #{payChannel, jdbcType=INTEGER} ,
+                    #{payType, jdbcType=INTEGER} ,
+                    #{subject, jdbcType=VARCHAR} ,
+                    #{payStatus, jdbcType=INTEGER} ,
+                    #{amount, jdbcType=DECIMAL} ,
+                    #{discount, jdbcType=DECIMAL} ,
+                    #{fee, jdbcType=DECIMAL} ,
+                    #{oddChange, jdbcType=DECIMAL} ,
+                    #{cancelType, jdbcType=INTEGER} ,
+                    #{createdAt, jdbcType=TIMESTAMP} ,
+                    #{updatedAt, jdbcType=TIMESTAMP} ,
+                    #{billTime, jdbcType=TIMESTAMP} ,
+                    #{remark, jdbcType=VARCHAR},
+                    2
+                )
+
+        ]]>
+    </insert>
+
+    <insert id="insertByBatch" parameterType="list">
+        <![CDATA[
+		INSERT INTO
+		payment_charges (
+			payment_chages_id ,
+			tx_id ,
+			merchant_id ,
+			shop_id ,
+			order_channel,
+			account_id ,
+			out_trade_no ,
+			order_code ,
+			user_id ,
+			pay_provider ,
+			pay_channel ,
+			pay_type ,
+			subject ,
+			pay_status ,
+			amount ,
+			discount ,
+			fee ,
+			odd_change ,
+			cancel_type ,
+			created_at ,
+			updated_at ,
+			bill_time ,
+			remark 
+		) VALUES ]]>
+        <foreach collection="list" item="item" separator=",">
+            <![CDATA[ (
+				#{item.paymentChagesId, jdbcType=VARCHAR} ,
+				#{item.txId, jdbcType=VARCHAR} ,
+				#{item.merchantId, jdbcType=VARCHAR} ,
+				#{item.shopId, jdbcType=VARCHAR} ,
+				#{item.orderChannel, jdbcType=INTEGER} ,
+				#{item.accountId, jdbcType=VARCHAR} ,
+				#{item.outTradeNo, jdbcType=VARCHAR} ,
+				#{item.orderCode, jdbcType=VARCHAR} ,
+				#{item.userId, jdbcType=VARCHAR} ,
+				#{item.payProvider, jdbcType=INTEGER} ,
+				#{item.payChannel, jdbcType=INTEGER} ,
+				#{item.payType, jdbcType=INTEGER} ,
+				#{item.subject, jdbcType=VARCHAR} ,
+				#{item.payStatus, jdbcType=INTEGER} ,
+				#{item.amount, jdbcType=DECIMAL} ,
+				#{item.discount, jdbcType=DECIMAL} ,
+				#{item.fee, jdbcType=DECIMAL} ,
+				#{item.oddChange, jdbcType=DECIMAL} ,
+				#{item.cancelType, jdbcType=INTEGER} ,
+				#{item.createdAt, jdbcType=TIMESTAMP} ,
+				#{item.updatedAt, jdbcType=TIMESTAMP} ,
+				#{item.billTime, jdbcType=TIMESTAMP} ,
+				#{item.remark, jdbcType=VARCHAR} 
+			)
+		]]>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.jzc.spring.boot.transfer.domain.PaymentCharges">
+    <![CDATA[
+
+                UPDATE payment_charges SET
+                    tx_id = #{txId, jdbcType=VARCHAR} ,
+                    merchant_id = #{merchantId, jdbcType=VARCHAR} ,
+                    shop_id = #{shopId, jdbcType=VARCHAR} ,
+                    order_channel = #{orderChannel, jdbcType=INTEGER} ,
+                    account_id = #{accountId, jdbcType=VARCHAR} ,
+                    out_trade_no = #{outTradeNo, jdbcType=VARCHAR} ,
+                    order_code = #{orderCode, jdbcType=VARCHAR} ,
+                    user_id = #{userId, jdbcType=VARCHAR} ,
+                    pay_provider = #{payProvider, jdbcType=INTEGER} ,
+                    pay_channel = #{payChannel, jdbcType=INTEGER} ,
+                    pay_type = #{payType, jdbcType=INTEGER} ,
+                    subject = #{subject, jdbcType=VARCHAR} ,
+                    pay_status = #{payStatus, jdbcType=INTEGER} ,
+                    amount = #{amount, jdbcType=DECIMAL} ,
+                    discount = #{discount, jdbcType=DECIMAL} ,
+                    fee = #{fee, jdbcType=DECIMAL} ,
+                    odd_change = #{oddChange, jdbcType=DECIMAL} ,
+                    cancel_type = #{cancelType, jdbcType=INTEGER} ,
+                    created_at = #{createdAt, jdbcType=TIMESTAMP} ,
+                    updated_at = #{updatedAt, jdbcType=TIMESTAMP} ,
+                    bill_time = #{billTime, jdbcType=TIMESTAMP} ,
+                    remark = #{remark, jdbcType=VARCHAR}
+                WHERE
+                    payment_chages_id = #{paymentChagesId, jdbcType=VARCHAR}
+
+        ]]>
+    </update>
+
+    <sql id="dynamicWhere">
+        <where>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(paymentChagesId)">
+                AND payment_charges.payment_chages_id = #{paymentChagesId}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(txId)">
+                AND payment_charges.tx_id = #{txId}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(merchantId)">
+                AND payment_charges.merchant_id = #{merchantId}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(shopId)">
+                AND payment_charges.shop_id = #{shopId}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(accountId)">
+                AND payment_charges.account_id = #{accountId}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(outTradeNo)">
+                AND payment_charges.out_trade_no = #{outTradeNo}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(orderCode)">
+                AND payment_charges.order_code = #{orderCode}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(userId)">
+                AND payment_charges.user_id = #{userId}
+            </if>
+            <if test="payProvider != null">
+                AND payment_charges.pay_provider = #{payProvider}
+            </if>
+            <if test="payChannel != null">
+                AND payment_charges.pay_channel = #{payChannel}
+            </if>
+            <if test="payType != null">
+                AND payment_charges.pay_type = #{payType}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(subject)">
+                AND payment_charges.subject = #{subject}
+            </if>
+            <if test="payStatus != null">
+                AND payment_charges.pay_status = #{payStatus}
+            </if>
+            <if test="amount != null">
+                AND payment_charges.amount = #{amount}
+            </if>
+            <if test="discount != null">
+                AND payment_charges.discount = #{discount}
+            </if>
+            <if test="fee != null">
+                AND payment_charges.fee = #{fee}
+            </if>
+            <if test="oddChange != null">
+                AND payment_charges.odd_change = #{oddChange}
+            </if>
+            <if test="cancelType != null">
+                AND payment_charges.cancel_type = #{cancelType}
+            </if>
+            <if test="createdAt != null">
+                AND payment_charges.created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                AND payment_charges.updated_at = #{updatedAt}
+            </if>
+            <if test="billTime != null">
+                AND payment_charges.bill_time = #{billTime}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(remark)">
+                AND payment_charges.remark = #{remark}
+            </if>
+            <if test="createdAtBefore != null">
+                AND payment_charges.created_at &lt; #{createdAtBefore}
+            </if>
+            <if test="createdAtAfter != null">
+                AND payment_charges.created_at &gt;= #{createdAtAfter}
+            </if>
+            <if test="checkStatus != null">
+                AND payment_charges.check_status = #{checkStatus}
+            </if>
+            <if test="checkStatusList != null">
+                AND (payment_charges.check_status IN
+                <foreach collection="checkStatusList" index="index" item="checkStatus" open="(" separator="," close=")">
+                    #{checkStatus}
+                </foreach>
+                    OR payment_charges.check_status IS NULL)
+            </if>
+            <if test="txIdList!=null">
+                AND payment_charges.tx_id in
+                <foreach collection="txIdList" index="index" item="txId" open="(" separator="," close=")">
+                    #{txId}
+                </foreach>
+            </if>
+            <if test="baseIdList!=null">
+                AND payment_charges.payment_chages_id in
+                <foreach collection="baseIdList" index="index" item="baseId" open="(" separator="," close=")">
+                    #{baseId}
+                </foreach>
+            </if>
+            <if test="payProviderNotNull != null">
+                AND payment_charges.pay_provider is not null
+            </if>
+        </where>
+    </sql>
+
+    <delete id="delete" parameterType="map">
+        DELETE FROM payment_charges
+        <include refid="dynamicWhere"/>
+    </delete>
+
+    <select id="count" resultType="java.lang.Integer" parameterType="map">
+        SELECT COUNT(1)
+        FROM payment_charges
+        <include refid="dynamicWhere"/>
+    </select>
+
+    <select id="query" parameterType="map" resultMap="paymentChargesResult">
+        SELECT
+        <include refid="commonColumns"/>
+        FROM payment_charges
+        <include refid="dynamicWhere"/>
+    </select>
+
+    <update id="updatePaymentCharges" parameterType="com.jzc.spring.boot.transfer.domain.PaymentCharges">
+        UPDATE payment_charges
+        <set>
+            <if test="outTradeNo != null and outTradeNo != ''">
+                out_trade_no = #{outTradeNo, jdbcType=VARCHAR} ,
+            </if>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId, jdbcType=VARCHAR} ,
+            </if>
+            <if test="payStatus != null">
+                pay_status = #{payStatus, jdbcType=INTEGER} ,
+            </if>
+            <if test="discount != null">
+                discount = #{discount, jdbcType=DECIMAL} ,
+            </if>
+            <if test="fee != null">
+                fee = #{fee, jdbcType=DECIMAL} ,
+            </if>
+            <if test="cancelType != null">
+                cancel_type = #{cancelType, jdbcType=INTEGER} ,
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="billTime != null">
+                bill_time = #{billTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark, jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE
+        payment_chages_id = #{paymentChagesId, jdbcType=VARCHAR}
+    </update>
+
+    <update id="batchUpdateCheckStatus" parameterType="java.util.List">
+        UPDATE payment_charges SET check_status = #{checkStatus}
+        <where>
+        <if test="chargesIdList != null">
+            AND payment_chages_id IN
+            <foreach collection="chargesIdList" index="index" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="oldCheckStatus!=null" >
+            AND check_status =#{oldCheckStatus}
+        </if>
+        <if test="createdAtBefore != null">
+            AND payment_charges.created_at &lt; #{createdAtBefore}
+        </if>
+        <if test="createdAtAfter != null">
+            AND payment_charges.created_at &gt;= #{createdAtAfter}
+        </if>
+        </where>
+    </update>
+
+    <update id="batchUpdate" parameterType="map">
+        update payment_charges
+        <set>
+            <trim prefix="fee =case" suffix="end,">
+                <foreach collection="chargesList" item="item" index="index">
+                    <if test="item.fee !=null">
+                        WHEN payment_chages_id=#{item.paymentChagesId} THEN #{item.fee}
+                    </if>
+                    <if test="item.fee == null">
+                        WHEN payment_chages_id=#{item.paymentChagesId} THEN fee
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="bill_time =case" suffix="end,">
+                <foreach collection="chargesList" item="item" index="index">
+                    <if test="item.billTime !=null">
+                        WHEN payment_chages_id=#{item.paymentChagesId} THEN #{item.billTime}
+                    </if>
+                    <if test="item.billTime == null">
+                        WHEN payment_chages_id=#{item.paymentChagesId} THEN bill_time
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="check_status =case" suffix="end,">
+                <foreach collection="chargesList" item="item" index="index">
+                    <if test="item.checkStatus !=null">
+                        WHEN payment_chages_id=#{item.paymentChagesId} THEN #{item.checkStatus}
+                    </if>
+                    <if test="item.checkStatus == null">
+                        WHEN payment_chages_id=#{item.paymentChagesId} THEN check_status
+                    </if>
+                </foreach>
+            </trim>
+        </set>
+        WHERE payment_chages_id IN
+        <foreach collection="chargesList" index="index" item="item" separator="," open="(" close=")">
+            #{item.paymentChagesId}
+        </foreach>
+    </update>
+
+    <select id="queryCancelTypeList" parameterType="map" resultMap="paymentChargesResult">
+        select
+        <include refid="commonColumns"/>
+        FROM payment_charges payment_charges
+        where payment_charges.cancel_type = #{cancelType}
+        and payment_charges.pay_status = #{payStatus}
+        and payment_charges.created_at &gt; #{afterTime}
+        order by payment_charges.created_at desc
+    </select>
+
+    <delete id="deleteTransfer" parameterType="map">
+        DELETE FROM payment_charges
+        where
+        <![CDATA[
+            created_at >= #{startDate} and created_at <= #{endDate} and shop_id = #{shopId}
+        ]]>
+    </delete>
+
+    <insert id="insertS" parameterType="list">
+        <![CDATA[
+		INSERT INTO
+		payment_charges_s (
+			payment_chages_id ,
+			tx_id ,
+			merchant_id ,
+			shop_id ,
+			order_channel,
+			account_id ,
+			out_trade_no ,
+			order_code ,
+			user_id ,
+			pay_provider ,
+			pay_channel ,
+			pay_type ,
+			subject ,
+			pay_status ,
+			amount ,
+			discount ,
+			fee ,
+			odd_change ,
+			cancel_type ,
+			created_at ,
+			updated_at ,
+			bill_time ,
+			remark
+		) VALUES ]]>
+        <foreach collection="list" item="item" separator=",">
+            <![CDATA[ (
+				#{item.paymentChagesId, jdbcType=VARCHAR} ,
+				#{item.txId, jdbcType=VARCHAR} ,
+				#{item.merchantId, jdbcType=VARCHAR} ,
+				#{item.shopId, jdbcType=VARCHAR} ,
+				#{item.orderChannel, jdbcType=INTEGER} ,
+				#{item.accountId, jdbcType=VARCHAR} ,
+				#{item.outTradeNo, jdbcType=VARCHAR} ,
+				#{item.orderCode, jdbcType=VARCHAR} ,
+				#{item.userId, jdbcType=VARCHAR} ,
+				#{item.payProvider, jdbcType=INTEGER} ,
+				#{item.payChannel, jdbcType=INTEGER} ,
+				#{item.payType, jdbcType=INTEGER} ,
+				#{item.subject, jdbcType=VARCHAR} ,
+				#{item.payStatus, jdbcType=INTEGER} ,
+				#{item.amount, jdbcType=DECIMAL} ,
+				#{item.discount, jdbcType=DECIMAL} ,
+				#{item.fee, jdbcType=DECIMAL} ,
+				#{item.oddChange, jdbcType=DECIMAL} ,
+				#{item.cancelType, jdbcType=INTEGER} ,
+				#{item.createdAt, jdbcType=TIMESTAMP} ,
+				#{item.updatedAt, jdbcType=TIMESTAMP} ,
+				#{item.billTime, jdbcType=TIMESTAMP} ,
+				#{item.remark, jdbcType=VARCHAR}
+			)
+		]]>
+        </foreach>
+    </insert>
+
+    <insert id="insertT" parameterType="list">
+        <![CDATA[
+		INSERT INTO
+		payment_charges_t (
+			payment_chages_id ,
+			tx_id ,
+			merchant_id ,
+			shop_id ,
+			order_channel,
+			account_id ,
+			out_trade_no ,
+			order_code ,
+			user_id ,
+			pay_provider ,
+			pay_channel ,
+			pay_type ,
+			subject ,
+			pay_status ,
+			amount ,
+			discount ,
+			fee ,
+			odd_change ,
+			cancel_type ,
+			created_at ,
+			updated_at ,
+			bill_time ,
+			remark
+		) VALUES ]]>
+        <foreach collection="list" item="item" separator=",">
+            <![CDATA[ (
+				#{item.paymentChagesId, jdbcType=VARCHAR} ,
+				#{item.txId, jdbcType=VARCHAR} ,
+				#{item.merchantId, jdbcType=VARCHAR} ,
+				#{item.shopId, jdbcType=VARCHAR} ,
+				#{item.orderChannel, jdbcType=INTEGER} ,
+				#{item.accountId, jdbcType=VARCHAR} ,
+				#{item.outTradeNo, jdbcType=VARCHAR} ,
+				#{item.orderCode, jdbcType=VARCHAR} ,
+				#{item.userId, jdbcType=VARCHAR} ,
+				#{item.payProvider, jdbcType=INTEGER} ,
+				#{item.payChannel, jdbcType=INTEGER} ,
+				#{item.payType, jdbcType=INTEGER} ,
+				#{item.subject, jdbcType=VARCHAR} ,
+				#{item.payStatus, jdbcType=INTEGER} ,
+				#{item.amount, jdbcType=DECIMAL} ,
+				#{item.discount, jdbcType=DECIMAL} ,
+				#{item.fee, jdbcType=DECIMAL} ,
+				#{item.oddChange, jdbcType=DECIMAL} ,
+				#{item.cancelType, jdbcType=INTEGER} ,
+				#{item.createdAt, jdbcType=TIMESTAMP} ,
+				#{item.updatedAt, jdbcType=TIMESTAMP} ,
+				#{item.billTime, jdbcType=TIMESTAMP} ,
+				#{item.remark, jdbcType=VARCHAR}
+			)
+		]]>
+        </foreach>
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jzc.spring.boot.transfer.dao.pay.PaymentRefundMapper">
+    <resultMap id="refundMap" type="com.jzc.spring.boot.transfer.domain.PaymentRefundEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="order_id" property="order_id" jdbcType="VARCHAR" />
+        <result column="refund_reason" property="refund_reason" jdbcType="VARCHAR" />
+        <result column="payment_serial_no" property="payment_serial_no" jdbcType="VARCHAR" />
+        <result column="refund_order_code" property="refund_order_code" jdbcType="VARCHAR" />
+        <result column="third_serial_no" property="third_serial_no" jdbcType="VARCHAR" />
+        <result column="refund_amount" property="refund_amount" javaType="java.math.BigDecimal" />
+        <result column="createtime" property="createtime" javaType="java.util.Date" />
+        <result column="refund_status" property="refund_status" javaType="java.math.BigDecimal" />
+        <result column="shop_code" property="shop_code" jdbcType="VARCHAR" />
+        <result column="pay_code" property="pay_code" jdbcType="VARCHAR" />
+        <result column="pay_method" property="pay_method" jdbcType="VARCHAR" />
+        <result column="plat_form" property="plat_form" jdbcType="VARCHAR" />
+        <result column="amount_fee" property="amount_fee" javaType="java.math.BigDecimal"/>
+        <result column="rate_fee" property="rate_fee" javaType="java.math.BigDecimal"/>
+        <result column="refund_remark" property="refund_remark" jdbcType="VARCHAR" />
+        <result column="merchant_id" property="merchant_id" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="base_coloumn">
+        id,
+        order_id,
+        refund_reason,
+        payment_serial_no,
+        refund_order_code,
+        third_serial_no,
+        refund_amount,
+        createtime,
+        refund_status,
+        shop_code,
+        pay_code,
+        pay_method,
+        plat_form,
+        amount_fee,
+        rate_fee,
+        refund_remark,
+        merchant_id
+    </sql>
+
+    <select id="selectPaymentRefundById" parameterType="java.math.BigDecimal" resultMap="refundMap">
+        SELECT
+        <include refid="base_coloumn"/>
+        FROM payment_refund
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectPaymentRefundList" parameterType="map" resultMap="refundMap">
+        SELECT
+          <include refid="base_coloumn"/>
+        FROM
+          payment_refund
+        <where>
+            <if test="order_id!=null">
+                and order_id = #{order_id}
+            </if>
+            <if test="payment_serial_no!=null">
+                and payment_serial_no = #{payment_serial_no}
+            </if>
+            <if test="refund_order_code!=null">
+                and refund_order_code = #{refund_order_code}
+            </if>
+            <if test="shop_code!=null">
+                and shop_code = #{shop_code}
+            </if>
+            <if test="third_serial_no!=null">
+                and third_serial_no = #{third_serial_no}
+            </if>
+            <if test="pay_code!=null">
+                and pay_code = #{pay_code}
+            </if>
+            <if test="pay_method!=null">
+                and pay_method = #{pay_method}
+            </if>
+            <if test="refund_status != null">
+                and refund_status = #{refund_status}
+            </if>
+            <if test="createtime_before != null"><![CDATA[
+                and createtime < #{createtime_before}
+            ]]></if>
+            <if test="createtime_after != null"><![CDATA[
+                and createtime >= #{createtime_after}
+            ]]></if>
+            <if test="merchant_id != null">
+                and merchant_id = #{merchant_id}
+            </if>
+        </where>
+        <if test="orderBy != null">
+            order by ${orderBy}
+        </if>
+    </select>
+
+    <insert id="insertPaymentRefund" useGeneratedKeys="true" keyProperty="id" parameterType="com.jzc.spring.boot.transfer.domain.PaymentRefundEntity">
+        INSERT INTO payment_refund (
+            order_id,
+            refund_reason,
+            payment_serial_no,
+            refund_order_code,
+            third_serial_no,
+            refund_amount,
+            createtime,
+            tradetime,
+            refund_status,
+            shop_code,
+            pay_code,
+            pay_method,
+            plat_form,
+            amount_fee,
+            rate_fee,
+            refund_remark,
+            merchant_id
+        ) VALUES (
+            #{order_id},
+            #{refund_reason},
+            #{payment_serial_no},
+            #{refund_order_code},
+            #{third_serial_no},
+            #{refund_amount},
+            #{createtime},
+            #{tradetime},
+            #{refund_status},
+            #{shop_code},
+            #{pay_code},
+            #{pay_method},
+            #{plat_form},
+            #{amount_fee},
+            #{rate_fee},
+            #{refund_remark},
+            #{merchant_id}
+        )
+    </insert>
+
+    <update id="updatePaymentRefund" parameterType="com.jzc.spring.boot.transfer.domain.PaymentRefundEntity">
+        UPDATE payment_refund
+        <set>
+            <if test="order_id!=null">
+                order_id = #{order_id},
+            </if>
+            <if test="refund_reason!=null">
+                refund_reason = #{refund_reason},
+            </if>
+            <if test="payment_serial_no!=null">
+                payment_serial_no = #{payment_serial_no},
+            </if>
+            <if test="refund_order_code!=null">
+                refund_order_code = #{refund_order_code},
+            </if>
+            <if test="third_serial_no!=null">
+                third_serial_no = #{third_serial_no},
+            </if>
+            <if test="refund_amount!=null">
+                refund_amount = #{refund_amount},
+            </if>
+            <if test="createtime!=null">
+                createtime = #{createtime},
+            </if>
+            <if test="refund_status!=null">
+                refund_status = #{refund_status},
+            </if>
+            <if test="shop_code!=null">
+                shop_code = #{shop_code},
+            </if>
+            <if test="pay_code!=null">
+                pay_code = #{pay_code},
+            </if>
+            <if test="pay_method!=null">
+                pay_method = #{pay_method},
+            </if>
+            <if test="plat_form!=null">
+                plat_form = #{plat_form},
+            </if>
+            <if test="amount_fee != null">
+                amount_fee = #{amount_fee},
+            </if>
+            <if test="refund_remark!=null">
+                refund_remark = #{refund_remark},
+            </if>
+            <if test="merchant_id!=null">
+                merchant_id = #{merchant_id},
+            </if>
+            <if test="tradetime!=null">
+                tradetime = #{tradetime},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="findOrderRefundAmount" resultType="java.math.BigDecimal">
+      SELECT
+        SUM(refund_amount)
+      FROM
+        payment_refund
+      WHERE
+        order_id = #{orderCode}
+        AND refund_status = 1
+    </select>
+
+    <delete id="delete" parameterType="long">
+      DELETE FROM
+        payment_refund
+      WHERE
+        id = #{id}
+    </delete>
+
+    <select id="selectDateList" parameterType="map" resultMap="refundMap">
+        SELECT
+        <include refid="base_coloumn"/>
+        FROM payment_refund
+        WHERE
+        <if test="id != null">
+            <![CDATA[
+              id < #{id} and
+            ]]>
+        </if>
+        <![CDATA[
+            createtime >= #{startDate} and createtime <= #{endDate} and shop_code = #{shopId}
+        ]]>
+        order by id desc
+        limit ${count}
+    </select>
+
+</mapper>

@@ -1,36 +1,25 @@
 package com.jzc.spring.coupon.service;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
-import com.github.pagehelper.PageHelper;
 import com.jzc.spring.coupon.dao.member.MessageNoticeRecordMapper;
 import com.jzc.spring.coupon.model.MessageNoticeRecord;
 import groovy.util.logging.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Service
+//@Service
 public class MessageNoticeService {
 
     static Map<String, String> ps = new HashMap<>();
@@ -320,8 +309,8 @@ public class MessageNoticeService {
 //    @Autowired
     MessageNoticeRecordMapper messageNoticeRecordMapper;
 
-    @Autowired
-    RabbitTemplate rabbitTemplate;
+//    @Autowired
+//    RabbitTemplate rabbitTemplate;
 
     public List<MessageNoticeRecord> list() {
         int pageIndex = 0;
@@ -347,7 +336,7 @@ public class MessageNoticeService {
                     String body = JSONObject.toJSONString(object);
                     System.out.println(body);
 
-                    rabbitTemplate.convertAndSend( "MEMBER_INTEGRAL_VARIATION", body);
+//                    rabbitTemplate.convertAndSend( "MEMBER_INTEGRAL_VARIATION", body);
                 }
             });
             pageIndex += index;
@@ -378,7 +367,7 @@ public class MessageNoticeService {
             String body = JSONObject.toJSONString(object);
             System.out.println(body);
 
-            rabbitTemplate.convertAndSend( "MEMBER_INTEGRAL_VARIATION", body);
+//            rabbitTemplate.convertAndSend( "MEMBER_INTEGRAL_VARIATION", body);
         }
     }
 

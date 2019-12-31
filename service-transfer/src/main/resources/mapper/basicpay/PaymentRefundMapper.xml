@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jzc.spring.boot.transfer.dao.basicpay.PaymentRefundDAO">
+    <resultMap id="paymentRefundResult" type="com.jzc.spring.boot.transfer.domain.PaymentRefund">
+        <result property="paymentRefundId" column="payment_refund_id" jdbcType="VARCHAR"/>
+        <result property="refundTxId" column="refund_tx_id" jdbcType="VARCHAR"/>
+        <result property="txId" column="tx_id" jdbcType="VARCHAR"/>
+        <result property="orderCode" column="order_code" jdbcType="VARCHAR"/>
+        <result property="merchantId" column="merchant_id" jdbcType="VARCHAR"/>
+        <result property="shopId" column="shop_id" jdbcType="VARCHAR"/>
+        <result property="orderChannel" column="order_channel" jdbcType="INTEGER"/>
+        <result property="accountId" column="account_id" jdbcType="VARCHAR"/>
+        <result property="outTradeNo" column="out_trade_no" jdbcType="VARCHAR"/>
+        <result property="refundStatus" column="refund_status" jdbcType="INTEGER"/>
+        <result property="payProvider" column="pay_provider" jdbcType="INTEGER"/>
+        <result property="payChannel" column="pay_channel" jdbcType="INTEGER"/>
+        <result property="payType" column="pay_type" jdbcType="INTEGER"/>
+        <result property="refundAmount" column="refund_amount" jdbcType="DECIMAL"/>
+        <result property="fee" column="fee" jdbcType="DECIMAL"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="billTime" column="bill_time" jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="checkStatus" column="check_status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="commonColumns">
+	    <![CDATA[
+
+                    payment_refund.payment_refund_id ,
+                    payment_refund.refund_tx_id ,
+                    payment_refund.tx_id ,
+                    payment_refund.order_code ,
+                    payment_refund.merchant_id ,
+                    payment_refund.shop_id ,
+                    payment_refund.order_channel,
+                    payment_refund.account_id ,
+                    payment_refund.out_trade_no ,
+                    payment_refund.refund_status ,
+                    payment_refund.pay_provider ,
+                    payment_refund.pay_channel ,
+                    payment_refund.pay_type ,
+                    payment_refund.refund_amount ,
+                    payment_refund.fee ,
+                    payment_refund.created_at ,
+                    payment_refund.updated_at ,
+                    payment_refund.bill_time ,
+                    payment_refund.remark
+
+        ]]>
+	</sql>
+
+    <insert id="insert" parameterType="com.jzc.spring.boot.transfer.domain.PaymentRefund">
+    <![CDATA[
+
+                INSERT INTO
+                payment_refund (
+                    payment_refund_id ,
+                    refund_tx_id ,
+                    tx_id ,
+                    order_code ,
+                    merchant_id ,
+                    shop_id ,
+                    order_channel,
+                    account_id ,
+                    out_trade_no ,
+                    refund_status ,
+                    pay_provider ,
+                    pay_channel ,
+                    pay_type ,
+                    refund_amount ,
+                    fee ,
+                    created_at ,
+                    updated_at ,
+                    bill_time ,
+                    remark,
+                    check_status
+                ) VALUES (
+                    #{paymentRefundId, jdbcType=VARCHAR} ,
+                    #{refundTxId, jdbcType=VARCHAR} ,
+                    #{txId, jdbcType=VARCHAR} ,
+                    #{orderCode, jdbcType=VARCHAR} ,
+                    #{merchantId, jdbcType=VARCHAR} ,
+                    #{shopId, jdbcType=VARCHAR} ,
+                    #{orderChannel, jdbcType=INTEGER} ,
+                    #{accountId, jdbcType=VARCHAR} ,
+                    #{outTradeNo, jdbcType=VARCHAR} ,
+                    #{refundStatus, jdbcType=INTEGER} ,
+                    #{payProvider, jdbcType=INTEGER} ,
+                    #{payChannel, jdbcType=INTEGER} ,
+                    #{payType, jdbcType=INTEGER} ,
+                    #{refundAmount, jdbcType=DECIMAL} ,
+                    #{fee, jdbcType=DECIMAL} ,
+                    #{createdAt, jdbcType=TIMESTAMP} ,
+                    #{updatedAt, jdbcType=TIMESTAMP} ,
+                    #{billTime, jdbcType=TIMESTAMP} ,
+                    #{remark, jdbcType=VARCHAR},
+                    2
+                )
+
+        ]]>
+    </insert>
+
+    <insert id="insertByBatch" parameterType="list">
+        <![CDATA[
+		INSERT INTO
+		payment_refund (
+			payment_refund_id ,
+			refund_tx_id ,
+			tx_id ,
+			order_code ,
+			merchant_id ,
+			shop_id ,
+			order_channel,
+			account_id ,
+			out_trade_no ,
+			refund_status ,
+			pay_provider ,
+			pay_channel ,
+			pay_type ,
+			refund_amount ,
+			fee ,
+			created_at ,
+			updated_at ,
+			bill_time ,
+			remark 
+		) VALUES ]]>
+        <foreach collection="list" item="item" separator=",">
+            <![CDATA[ (
+				#{item.paymentRefundId, jdbcType=VARCHAR} ,
+				#{item.refundTxId, jdbcType=VARCHAR} ,
+				#{item.txId, jdbcType=VARCHAR} ,
+				#{item.orderCode, jdbcType=VARCHAR} ,
+				#{item.merchantId, jdbcType=VARCHAR} ,
+				#{item.shopId, jdbcType=VARCHAR} ,
+				#{item.orderChannel, jdbcType=INTEGER} ,
+				#{item.accountId, jdbcType=VARCHAR} ,
+				#{item.outTradeNo, jdbcType=VARCHAR} ,
+				#{item.refundStatus, jdbcType=INTEGER} ,
+				#{item.payProvider, jdbcType=INTEGER} ,
+				#{item.payChannel, jdbcType=INTEGER} ,
+				#{item.payType, jdbcType=INTEGER} ,
+				#{item.refundAmount, jdbcType=DECIMAL} ,
+				#{item.fee, jdbcType=DECIMAL} ,
+				#{item.createdAt, jdbcType=TIMESTAMP} ,
+				#{item.updatedAt, jdbcType=TIMESTAMP} ,
+				#{item.billTime, jdbcType=TIMESTAMP} ,
+				#{item.remark, jdbcType=VARCHAR} 
+			)
+		]]>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.jzc.spring.boot.transfer.domain.PaymentRefund">
+    <![CDATA[
+
+                UPDATE payment_refund SET
+                    refund_tx_id = #{refundTxId, jdbcType=VARCHAR} ,
+                    tx_id = #{txId, jdbcType=VARCHAR} ,
+                    merchant_id = #{merchantId, jdbcType=VARCHAR} ,
+                    shop_id = #{shopId, jdbcType=VARCHAR} ,
+                    order_channel = #{orderChannel, jdbcType=INTEGER} ,
+                    account_id = #{accountId, jdbcType=VARCHAR} ,
+                    out_trade_no = #{outTradeNo, jdbcType=VARCHAR} ,
+                    refund_status = #{refundStatus, jdbcType=INTEGER} ,
+                    pay_provider = #{payProvider, jdbcType=INTEGER} ,
+                    pay_channel = #{payChannel, jdbcType=INTEGER} ,
+                    pay_type = #{payType, jdbcType=INTEGER} ,
+                    refund_amount = #{refundAmount, jdbcType=DECIMAL} ,
+                    fee = #{fee, jdbcType=DECIMAL} ,
+                    created_at = #{createdAt, jdbcType=TIMESTAMP} ,
+                    updated_at = #{updatedAt, jdbcType=TIMESTAMP} ,
+                    bill_time = #{billTime, jdbcType=TIMESTAMP} ,
+                    remark = #{remark, jdbcType=VARCHAR}
+                WHERE
+                    payment_refund_id = #{paymentRefundId, jdbcType=VARCHAR}
+
+        ]]>
+    </update>
+
+    <sql id="dynamicWhere">
+        <where>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(paymentRefundId)">
+                AND payment_refund.payment_refund_id = #{paymentRefundId}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(refundTxId)">
+                AND payment_refund.refund_tx_id = #{refundTxId}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(txId)">
+                AND payment_refund.tx_id = #{txId}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(merchantId)">
+                AND payment_refund.merchant_id = #{merchantId}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(shopId)">
+                AND payment_refund.shop_id = #{shopId}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(accountId)">
+                AND payment_refund.account_id = #{accountId}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(outTradeNo)">
+                AND payment_refund.out_trade_no = #{outTradeNo}
+            </if>
+            <if test="refundStatus != null">
+                AND payment_refund.refund_status = #{refundStatus}
+            </if>
+            <if test="payProvider != null">
+                AND payment_refund.pay_provider = #{payProvider}
+            </if>
+            <if test="payChannel != null">
+                AND payment_refund.pay_channel = #{payChannel}
+            </if>
+            <if test="payType != null">
+                AND payment_refund.pay_type = #{payType}
+            </if>
+            <if test="refundAmount != null">
+                AND payment_refund.refund_amount = #{refundAmount}
+            </if>
+            <if test="fee != null">
+                AND payment_refund.fee = #{fee}
+            </if>
+            <if test="createdAt != null">
+                AND payment_refund.created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                AND payment_refund.updated_at = #{updatedAt}
+            </if>
+            <if test="billTime != null">
+                AND payment_refund.bill_time = #{billTime}
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(remark)">
+                AND payment_refund.remark = #{remark}
+            </if>
+            <if test="createdAtBefore != null">
+                AND payment_refund.created_at &lt; #{createdAtBefore}
+            </if>
+            <if test="createdAtAfter != null">
+                AND payment_refund.created_at &gt;= #{createdAtAfter}
+            </if>
+            <if test="checkStatus != null">
+                AND payment_refund.check_status = #{checkStatus}
+            </if>
+            <if test="checkStatusList != null">
+                AND (payment_refund.check_status in
+                <foreach collection="checkStatusList" index="index" item="checkStatus" open="(" separator="," close=")">
+                    #{checkStatus}
+                </foreach>
+                    or payment_refund.check_status is null)
+            </if>
+            <if test="refundTxIdList!=null">
+                AND payment_refund.refund_tx_id in
+                <foreach collection="refundTxIdList" index="index" item="refundTxId" open="(" separator="," close=")">
+                    #{refundTxId}
+                </foreach>
+            </if>
+            <if test="baseIdList!=null">
+                AND payment_refund.payment_refund_id in
+                <foreach collection="baseIdList" index="index" item="baseId" open="(" separator="," close=")">
+                    #{baseId}
+                </foreach>
+            </if>
+            <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(orderCode)">
+                AND order_code = #{orderCode}
+            </if>
+            <if test="payProviderNotNull != null">
+                AND payment_refund.pay_provider is not null
+            </if>
+        </where>
+    </sql>
+
+    <delete id="delete" parameterType="map">
+        DELETE FROM payment_refund
+        <include refid="dynamicWhere"/>
+    </delete>
+
+    <select id="count" resultType="java.lang.Integer" parameterType="map">
+        SELECT COUNT(1)
+        FROM payment_refund
+        <include refid="dynamicWhere"/>
+    </select>
+
+    <select id="query" parameterType="map" resultMap="paymentRefundResult">
+        SELECT
+        <include refid="commonColumns"/>
+        FROM payment_refund
+        <include refid="dynamicWhere"/>
+    </select>
+
+    <update id="updatePaymentRefund" parameterType="com.jzc.spring.boot.transfer.domain.PaymentRefund">
+		UPDATE payment_refund SET
+	        refund_status = #{refundStatus, jdbcType=INTEGER} ,
+	        updated_at = #{updatedAt, jdbcType=TIMESTAMP} ,
+	        bill_time = #{billTime, jdbcType=TIMESTAMP}
+        WHERE
+	        payment_refund_id = #{paymentRefundId, jdbcType=VARCHAR}
+	</update>
+
+    <update id="batchUpdateCheckStatus">
+        UPDATE payment_refund SET check_status = #{checkStatus}
+        <where>
+            <if test="refundIdList != null">
+                AND payment_refund_id in
+                <foreach collection="refundIdList" index="index" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="oldCheckStatus!=null" >
+                AND check_status =#{oldCheckStatus}
+            </if>
+            <if test="createdAtBefore != null">
+                AND created_at &lt; #{createdAtBefore}
+            </if>
+            <if test="createdAtAfter != null">
+                AND created_at &gt;= #{createdAtAfter}
+            </if>
+        </where>
+    </update>
+
+    <update id="batchUpdate" parameterType="map">
+        update payment_refund
+        <set>
+            <trim prefix="fee =case" suffix="end,">
+                <foreach collection="refundList" item="item" index="index">
+                    <if test="item.fee !=null">
+                        when payment_refund_id=#{item.paymentRefundId} then #{item.fee}
+                    </if>
+                    <if test="item.fee == null">
+                        when payment_refund_id=#{item.paymentRefundId} then fee
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="bill_time =case" suffix="end,">
+                <foreach collection="refundList" item="item" index="index">
+                    <if test="item.billTime !=null">
+                        when payment_refund_id=#{item.paymentRefundId} then #{item.billTime}
+                    </if>
+                    <if test="item.billTime == null">
+                        when payment_refund_id=#{item.paymentRefundId} then bill_time
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="check_status =case" suffix="end,">
+                <foreach collection="refundList" item="item" index="index">
+                    <if test="item.checkStatus !=null">
+                        when payment_refund_id=#{item.paymentRefundId} then #{item.checkStatus}
+                    </if>
+                    <if test="item.checkStatus == null">
+                        when payment_refund_id=#{item.paymentRefundId} then check_status
+                    </if>
+                </foreach>
+            </trim>
+        </set>
+        where payment_refund_id in
+        <foreach collection="refundList" index="index" item="item" separator="," open="(" close=")">
+            #{item.paymentRefundId}
+        </foreach>
+    </update>
+
+    <delete id="deleteTransfer" parameterType="map">
+        DELETE FROM payment_refund
+        where
+        <![CDATA[
+            created_at >= #{startDate} and created_at <= #{endDate} and shop_id = #{shopId}
+        ]]>
+    </delete>
+
+</mapper>

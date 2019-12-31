@@ -41,9 +41,39 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>fluent-hc</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jzc.spring</groupId>
+			<artifactId>service-common</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>com.jzc.spring</groupId>
 			<artifactId>service-event</artifactId>
 			<version>${jzc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>com.toonyoo</groupId>
+			<artifactId>wechat-sdk</artifactId>
 		</dependency>
 
 	</dependencies>

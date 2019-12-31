@@ -25,20 +25,20 @@ public class OptionalProcessorTest {
                         .map(UserEntity::getName)
                         .orElse("name is empty")
         );
-        outPrint(
-                Optional.ofNullable(user)
-                        .map(UserEntity::getId)
-                        .orElseThrow(() -> new IllegalArgumentException("参数错误"))
-        );
-        outPrint(
-                Optional.ofNullable(user)
-                        .map(UserEntity::getAddress)
-                        .map(AddressEntity::getCountry)
-                        .map(CountryEntity::getMap)
-                        .orElseThrow(() -> new IllegalArgumentException("map is empty")).get("name")
-        );
-
-        System.out.println(Optional.ofNullable(user).map(UserEntity::getAddress).map(AddressEntity::getContext).orElse(null));
+//        outPrint(
+//                Optional.ofNullable(user)
+//                        .map(UserEntity::getId)
+//                        .orElseThrow(() -> new IllegalArgumentException("参数错误"))
+//        );
+//        outPrint(
+//                Optional.ofNullable(user)
+//                        .map(UserEntity::getAddress)
+//                        .map(AddressEntity::getCountry)
+//                        .map(CountryEntity::getMap)
+//                        .orElseThrow(() -> new IllegalArgumentException("map is empty")).get("name")
+//        );
+//
+//        System.out.println(Optional.ofNullable(user).map(UserEntity::getAddress).map(AddressEntity::getContext).orElse(null));
 
     }
 

@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("message")
 public class MessageNoticeController {
 
-    @Autowired
+//    @Autowired
     MessageNoticeService messageNoticeService;
 
     @RequestMapping("list")

@@ -2,6 +2,7 @@ package com.jzc.spring.boot.test;
 
 import com.alibaba.fastjson.JSON;
 import com.jzc.spring.boot.test.garble.IdGarble;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -320,6 +321,36 @@ public class MainProcessorTest {
 
         System.out.print(BigDecimal.valueOf(bd.intValue()).compareTo(bd) == 0);
 
+    }
+
+    @Test
+    public void bigdeciamlUP () {
+        BigDecimal bd = new BigDecimal("1.8");
+
+        System.out.println(bd.setScale(0, BigDecimal.ROUND_UP));
+        System.out.println(bd.setScale(0, BigDecimal.ROUND_HALF_UP));
+        System.out.println(bd.setScale(0, BigDecimal.ROUND_DOWN));
+
+
+        System.out.println("WRUKNS6719447944858264815".toUpperCase().startsWith("WRUKNS"));
+
+    }
+
+    @Test
+    public void testUp () {
+        Random random = new Random();
+//        random.nextInt(9);
+        for (int i=0; i<100; i++) {
+            System.out.println(random.nextInt(9));
+        }
+
+    }
+
+    @Test
+    public void stringEquals() {
+        String a = "姜志超";
+        String b = "姜志超";
+        System.out.println(StringUtils.equals(a, b));
     }
 
 

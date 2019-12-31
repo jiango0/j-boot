@@ -30,6 +30,8 @@
         <module>service-ali-es</module>
         <module>service-ali-es-high</module>
         <module>service-cmb</module>
+        <module>service-transfer</module>
+        <module>service-wechat</module>
     </modules>
 
     <dependencyManagement>
@@ -180,6 +182,12 @@
                 <groupId>com.toonyoo.micro.cloud</groupId>
                 <artifactId>toonyoo-micro-cloud-datasource</artifactId>
                 <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.toonyoo</groupId>
+                <artifactId>wechat-sdk</artifactId>
+                <version>2.8.28</version>
             </dependency>
 
         </dependencies>

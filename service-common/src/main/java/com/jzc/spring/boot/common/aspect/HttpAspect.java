@@ -37,10 +37,13 @@ public class HttpAspect {
     }
 
     @Around("execute()")
-    public void aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
-        System.out.println("aroundBeforeAdvice ====> ");
-        joinPoint.proceed();
-        System.out.println("aroundAfterAdvice ====> ");
+    public Object aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
+        try {
+            System.out.println("aroundBeforeAdvice ====> ");
+            return joinPoint.proceed();
+        } finally {
+            System.out.println("aroundAfterAdvice ====> ");
+        }
     }
 
 }
