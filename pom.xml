@@ -27,6 +27,7 @@
         <module>service-generate</module>
         <module>service-statistics</module>
         <module>service-monitor</module>
+        <module>service-netty</module>
         <module>service-ali-es</module>
         <module>service-ali-es-high</module>
         <module>service-cmb</module>
