@@ -38,4 +38,30 @@ public class ThreadPoolProcessorTest {
         Thread.sleep(11000);
     }
 
+    private static boolean b = false;
+    private static int i = 0;
+
+    public static void  main(String[] args) throws Exception {
+
+        System.out.println("1");
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(100);
+                b = true;
+                System.out.println("3");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        Integer c = 0;
+        while (!b) {
+            c++;
+        }
+
+        System.out.println("end");
+
+    }
+
 }

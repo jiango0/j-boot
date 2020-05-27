@@ -2,45 +2,37 @@ package com.jzc.spring.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.string.StringDecoder;
 
 public class NettyServer {
 
     public static void main(String[] args) throws Exception {
+
         ServerBootstrap serverBootstrap = new ServerBootstrap();
 
-        NioEventLoopGroup boos = new NioEventLoopGroup();
-        NioEventLoopGroup worker = new NioEventLoopGroup();
+        EventLoopGroup boor = new NioEventLoopGroup();
+        EventLoopGroup worker = new NioEventLoopGroup();
 
-        ChannelFuture future = serverBootstrap
-                .group(boos, worker)
+        serverBootstrap
+                .group(boor, worker)
                 .channel(NioServerSocketChannel.class)
-                .childHandler(new ChannelInitializer<NioSocketChannel>() {
+                .childHandler(new ChannelInitializer<SocketChannel>() {
 
                     @Override
-                    protected void initChannel(NioSocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new StringDecoder());
-                        ch.pipeline().addLast(new SimpleChannelInboundHandler<String>() {
-
-                            @Override
-                            protected void channelRead0(ChannelHandlerContext ctx, String msg) {
-                                System.out.println(msg);
-                            }
-
-                        });
+                    protected void initChannel(SocketChannel socketChannel) throws Exception {
+                        socketChannel.pipeline().addLast(new NettyServerHandler());
                     }
 
-                })
-                .bind(8000)
-                .sync();
+                });
 
+        ChannelFuture future = serverBootstrap.bind(8800).sync();
         future.channel().closeFuture().sync();
+        boor.shutdownGracefully();
+        worker.shutdownGracefully();
 
     }
 
