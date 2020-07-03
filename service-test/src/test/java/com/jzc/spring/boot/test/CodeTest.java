@@ -11,6 +11,13 @@ public class CodeTest {
     @Test
     public void createCode() {
 
+        System.out.println(8 >>> 7);
+
+        int a = 129;
+        int b = 129;
+
+        System.out.println(b & a);
+
     }
 
 }
