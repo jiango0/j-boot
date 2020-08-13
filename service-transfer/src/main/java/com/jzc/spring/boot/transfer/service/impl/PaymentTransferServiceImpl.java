@@ -1,7 +1,5 @@
 package com.jzc.spring.boot.transfer.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.jzc.spring.boot.transfer.dao.basicpay.PaymentChargesDAO;
 import com.jzc.spring.boot.transfer.dao.basicpay.PaymentRefundDAO;
 import com.jzc.spring.boot.transfer.dao.pay.PaymentAccountMapper;
@@ -81,7 +79,7 @@ public class PaymentTransferServiceImpl implements PaymentTransferService {
             }
         } while (id != null);
 
-        log.info("chargesTransfer fail size {} fail list {} ", failList.size(), JSON.toJSONString(failList));
+        log.info("chargesTransfer fail size {} fail list {} ", failList.size(), "");
     }
 
     /**
@@ -132,7 +130,7 @@ public class PaymentTransferServiceImpl implements PaymentTransferService {
             }
         } while (id != null);
 
-        log.info("refundTransfer fail size {} fail list {} ", failList.size(), JSON.toJSONString(failList));
+        log.info("refundTransfer fail size {} fail list {} ", failList.size(),  "");
     }
 
     private PaymentCharges toPaymentCharges(PaymentAccountEntity paymentAccountEntity) {
