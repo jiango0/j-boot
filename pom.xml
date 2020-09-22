@@ -34,6 +34,7 @@
         <module>service-transfer</module>
         <module>service-wechat</module>
         <module>service-thread</module>
+        <module>service-sharding</module>
     </modules>
 
     <dependencyManagement>
