@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jzc.spring.coupon.dao.message.MessageMapper" >
+
+
+  <insert id="insert" parameterType="com.jzc.spring.coupon.model.Message">
+    <![CDATA[
+                        INSERT INTO
+                        message (
+                            message_id ,
+                            merchant_id ,
+                            message_status ,
+                            title ,
+                            content ,
+                            sender ,
+                            sender_name ,
+                            create_at ,
+                            receiver ,
+                            receiver_name ,
+                            change_at
+                        ) VALUES (
+                            #{messageId, jdbcType=VARCHAR} ,
+                            #{merchantId, jdbcType=VARCHAR} ,
+                            #{messageStatus, jdbcType=INTEGER} ,
+                            #{title, jdbcType=VARCHAR} ,
+                            #{content, jdbcType=LONGVARCHAR} ,
+                            #{sender, jdbcType=VARCHAR} ,
+                            #{senderName, jdbcType=VARCHAR} ,
+                            #{createAt, jdbcType=TIMESTAMP} ,
+                            #{receiver, jdbcType=VARCHAR} ,
+                            #{receiverName, jdbcType=VARCHAR} ,
+                            #{changeAt, jdbcType=TIMESTAMP}
+                        )
+        ]]>
+  </insert>
+
+</mapper>

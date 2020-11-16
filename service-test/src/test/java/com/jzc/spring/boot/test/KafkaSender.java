@@ -15,7 +15,7 @@ public class KafkaSender {
 
     static {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "10.100.50.22:9092");//服务器ip:端口号，集群用逗号分隔
+        props.put("bootstrap.servers", "10.100.51.56:9092");//服务器ip:端口号，集群用逗号分隔
         props.put("acks", "all");
         props.put("retries", "0");
         props.put("batch.size", "16384");
@@ -38,8 +38,8 @@ public class KafkaSender {
 
     @Test
     public void start() {
-        String topic = "payment_v2";
-        String message = "{\"topic\":\"payment_v2\",\"bizType\":\"payment_v2\",\"bizItem\":\"charges\",\"message\":{\"paymentChagesId\":\"a2b972b5-0a25-49c0-9749-0abe2a1c042f\",\"txId\":\"6843224530052297821\",\"merchantId\":\"dwj\",\"shopId\":\"345d34b4-4cd2-4976-a9af-82511a8ab639\",\"orderChannel\":3,\"orderCode\":\"6843223799907857501\",\"payChannel\":9,\"payType\":3,\"payProvider\":2,\"subject\":\"游戏币\",\"payStatus\":1,\"amount\":1,\"createdAt\":\"2020-06-28 11:04:22\",\"updatedAt\":\"2020-06-28 11:04:22\",\"billTime\":\"2020-06-28 11:04:22\"}}";
+        String topic = "order_v2";
+        String message = "{\"topic\":\"order_v2\",\"bizType\":\"order_v2\",\"bizItem\":\"order_v2_normal\",\"message\":{\"orderCode\":\"68755193125688815442\",\"shopId\":\"11885493-d1b2-48d4-a43c-8142c005e5b1\",\"merchantId\":\"dwj\",\"orderChannel\":3,\"orderType\":3,\"orderDirection\":0,\"orderName\":\"游戏币\",\"orderStatus\":2,\"shippedStatus\":1,\"payStatus\":1,\"shippedType\":0,\"goodsNum\":1,\"remark\":\"现金付款\",\"creator\":\"胡一一\",\"orderAt\":\"2020-09-23 11:26:27\",\"updatedAt\":\"2020-09-23 11:26:28\",\"finishedAt\":\"2020-09-23 11:26:28\",\"payedAt\":\"2020-09-23 11:26:27\",\"shippedAt\":\"2020-09-23 11:26:28\",\"orderDetailList\":[{\"orderDetailId\":\"568b9001-d624-11ea-8061-000c2929f0b1\",\"goodsSku\":\"BI20190001\",\"goodsType\":0,\"goodsCategory\":\"01-0101\",\"goodsName\":\"游戏币\",\"goodsQty\":1,\"orderItemDetailList\":[{\"goodsPrice\":1,\"priceType\":0,\"amountTotal\":1,\"amountDiscount\":0,\"amountPayable\":1,\"amountShare\":1}]}],\"orderShipping\":{\"shippingType\":\"normal_goods\"},\"orderBuyer\":{\"memberType\":\"2\"},\"orderPayment\":{\"amount\":100,\"payChannel\":8,\"payType\":4},\"orderPaySummaryList\":[{\"priceType\":0,\"amountDiscount\":0,\"amountPayable\":1,\"amountTotal\":1}],\"orderExt\":{\"cashier_code\":\"c44b04b4-2c00-493d-95ea-ea3f419a76ac\",\"sourceProduct\":0,\"bizCode\":\"1112110\",\"shopName\":\"上海闵行区上海浦江万达\",\"give_amount\":0,\"device_num\":\"ece0d954-48db-47db-bb51-9e6c6b2d0f57\",\"cashier_name\":\"胡一一\",\"sale_quantity\":1,\"order_category\":0,\"device_name\":\"收银台郑玲聪0925\",\"brandId\":\"c2e802ba-0c6b-2460-8ec4-9cb810c92b6c\",\"busType\":\"CASH_CURRENCY\",\"goodsName\":\"游戏币\",\"give_quantity\":0}}}";
 
         send(topic, message);
     }

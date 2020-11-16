@@ -14,6 +14,7 @@ import org.elasticsearch.action.search.MultiSearchRequest;
 import org.elasticsearch.action.search.MultiSearchResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -40,7 +41,7 @@ public class ESHighServiceImpl implements ESHighService {
         });
 
         try {
-            BulkResponse bulkResponse = ClientInitialize.getClient().bulk(request);
+            BulkResponse bulkResponse = ClientInitialize.getClient().bulk(request, RequestOptions.DEFAULT);
             System.out.println(JSONObject.toJSONString(bulkResponse));
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,10 +74,10 @@ public class ESHighServiceImpl implements ESHighService {
 
 
         try {
-            SearchResponse searchResponse = ClientInitialize.getClient().search(searchRequest);
+            SearchResponse searchResponse = ClientInitialize.getClient().search(searchRequest, RequestOptions.DEFAULT);
 
             SearchHits hits = searchResponse.getHits();
-            long totalHits = hits.getTotalHits();
+            long totalHits = hits.getTotalHits().value;
             List<ESHighEntity> list = new ArrayList<>();
             PageList<ESHighEntity> result = new PageList<>(1, 10, list, totalHits);
 
@@ -99,7 +100,7 @@ public class ESHighServiceImpl implements ESHighService {
                 .source(new SearchSourceBuilder().query(QueryBuilders.termQuery("num", esHighEntity.getNum()))));
 
         try {
-            MultiSearchResponse items = ClientInitialize.getClient().multiSearch(request);
+            MultiSearchResponse items = ClientInitialize.getClient().multiSearch(request, RequestOptions.DEFAULT);
             return JSONObject.toJSONString(items);
         } catch (IOException e) {
             e.printStackTrace();

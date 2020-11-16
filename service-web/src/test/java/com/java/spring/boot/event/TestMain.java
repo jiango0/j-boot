@@ -1,5 +1,7 @@
 package com.java.spring.boot.event;
 
+import gui.ava.html.image.generator.HtmlImageGenerator;
+
 public class TestMain {
 
     public static void main(String[] args) {
@@ -7,6 +9,9 @@ public class TestMain {
         int k = 2;
         System.out.println(i++);
         System.out.println(++k);
+
+        HtmlImageGenerator htmlImageGenerator = new HtmlImageGenerator();
+
     }
 
 

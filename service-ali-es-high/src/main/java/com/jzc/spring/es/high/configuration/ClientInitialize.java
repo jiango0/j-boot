@@ -29,11 +29,14 @@ public class ClientInitialize {
                 new UsernamePasswordCredentials("elastic", "Jukey@123"));
 
         HttpHost[] httpHosts = new HttpHost[1];
-        httpHosts[0] = new HttpHost("es-cn-0pp128px3000fvfbi.public.elasticsearch.aliyuncs.com", 9200);
+        httpHosts[0] = new HttpHost("10.100.10.29", 9200);
+
+//        RestClientBuilder restClientBuilder = RestClient
+//                .builder(httpHosts)
+//                .setHttpClientConfigCallback(httpAsyncClientBuilder -> httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider));
 
         RestClientBuilder restClientBuilder = RestClient
-                .builder(httpHosts)
-                .setHttpClientConfigCallback(httpAsyncClientBuilder -> httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider));
+                .builder(httpHosts);
 
         client = new RestHighLevelClient(restClientBuilder);
         log.info("es end");

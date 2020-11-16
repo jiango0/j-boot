@@ -1,14 +1,9 @@
-package com.jzc.spring.boot.test;
+package com.java.spring.boot.event;
 
+import gui.ava.html.image.generator.HtmlImageGenerator;
 import org.junit.Test;
-import org.springframework.util.Base64Utils;
 
-import java.util.Base64;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
-
-public class CodeTest {
+public class HtmlGenerator {
 
     String html = "<div cssurl='//sku-market-gw.jd.com/css/pc/100004710073.css?t=1595425859737'></div><div id='zbViewModulesH'  value='21192'></div><input id='zbViewModulesHeight' type='hidden' value='21192'/><div skudesign=\"100010\"></div><div class=\"ssd-module-wrap\" >\n" +
             "    <div class=\"ssd-module M15676871678031 animate-M15676871678031\" data-id=\"M15676871678031\">\n" +
@@ -93,23 +88,20 @@ public class CodeTest {
             "</style>";
 
     @Test
-    public void createCode() {
+    public void test1() {
+        HtmlImageGenerator imageGenerator = new HtmlImageGenerator();
+        imageGenerator.loadHtml(html);
+        try {
+            // Thread.sleep(5000);
+            imageGenerator.getBufferedImage();
+            // Thread.sleep(8000);
+            String path = "d:\\1.png";
+            imageGenerator.saveAsImage(path);
 
-        System.out.println(8 >>> 7);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        int a = 129;
-        int b = 129;
-
-        System.out.println(b & a);
-
-    }
-
-    @Test
-    public void cd() {
-        String encode = Base64Utils.encodeToString(html.getBytes());
-        System.out.println(encode);
-        byte[] bytes = Base64Utils.decodeFromString(encode);
-        System.out.println(new String(bytes));
     }
 
 }
