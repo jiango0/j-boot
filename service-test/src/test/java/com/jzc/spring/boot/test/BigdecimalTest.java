@@ -34,4 +34,37 @@ public class BigdecimalTest {
         System.out.println(d.compareTo(x));
     }
 
+    @Test
+    public void rounding() {
+
+        BigDecimal amount = new BigDecimal("8.119304347826087");
+
+        System.out.println(amount.setScale(2, BigDecimal.ROUND_DOWN));
+
+    }
+
+    @Test
+    public void bigdecimalsc() {
+        BigDecimal amount = new BigDecimal("12.1234");
+
+        System.out.println(amount.setScale(2, BigDecimal.ROUND_DOWN));
+
+        System.out.println(amount);
+    }
+
+    @Test
+    public void bigdecimalyy() {
+        BigDecimal amount = BigDecimal.ONE;
+        setBigdecimal(amount);
+        amount = amount.add(BigDecimal.ONE);
+
+        System.out.println(amount);
+        System.out.println(xx);
+    }
+
+    BigDecimal xx = BigDecimal.ZERO;
+    public void setBigdecimal(BigDecimal amount) {
+        xx = amount;
+    }
+
 }

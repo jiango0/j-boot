@@ -16,7 +16,7 @@ public class MathTest {
         Map<Integer, Integer> randomMap = new HashMap<>();
 
         Random random = new Random();
-        for (int i=0; i<1000; i++) {
+        for (int i = 0; i < 1000; i++) {
             int i1 = random.nextInt(4) + 1;
 
             if (randomMap.containsKey(i1)) {
@@ -55,7 +55,7 @@ public class MathTest {
     @Test
     public void main2() {
 
-        List<Integer> coupons = new ArrayList<Integer>(){{
+        List<Integer> coupons = new ArrayList<Integer>() {{
             add(3);
             add(5);
             add(10);
@@ -76,14 +76,14 @@ public class MathTest {
 
     }
 
-    public static Map<Integer, Integer>  couponDeal(List<Integer> coupons, Integer totalCoins, Integer totalCardNum) {
-        Map<Integer,Integer> couponsWithNums = new HashMap<>();
+    public static Map<Integer, Integer> couponDeal(List<Integer> coupons, Integer totalCoins, Integer totalCardNum) {
+        Map<Integer, Integer> couponsWithNums = new HashMap<>();
         TreeList<Integer> list = new TreeList<>(coupons);
         IntSummaryStatistics intSummaryStatistics = coupons.stream().mapToInt(Integer::intValue).summaryStatistics();
         Integer sum = Long.valueOf(intSummaryStatistics.getSum()).intValue();
         List<Double> doubleList = new TreeList<>();
         for (Integer coupon : list) {
-            BigDecimal result = (new BigDecimal(coupon)).divide(new BigDecimal(sum),2, RoundingMode.HALF_UP);
+            BigDecimal result = (new BigDecimal(coupon)).divide(new BigDecimal(sum), 2, RoundingMode.HALF_UP);
             doubleList.add(result.doubleValue());
         }
         int restCardNum = totalCardNum;
@@ -91,24 +91,24 @@ public class MathTest {
         int sumCardNum = 0;
         int sumCoinNum = 0;
         int size = list.size();
-        for(int i=0;i<=size-1;i++) {
-            int bound =  new BigDecimal(totalCardNum).multiply(new BigDecimal(doubleList.get(i))).intValue();
+        for (int i = 0; i <= size - 1; i++) {
+            int bound = new BigDecimal(totalCardNum).multiply(new BigDecimal(doubleList.get(i))).intValue();
             int coupon = list.get(i);
-            int cardNum = bound * (size)/(i+1);
+            int cardNum = bound * (size) / (i + 1);
             int coinNum = new BigDecimal(coupon).multiply(new BigDecimal(cardNum)).intValue();
             couponsWithNums.put(coupon, cardNum);
             restCardNum -= cardNum;
             restCoinNum -= coinNum;
-            System.out.printf("coinType:%s cardNum:%s coinNum:%s restCardNum:%s restCoinNum:%s\n",coupon,cardNum,coinNum,restCardNum,restCoinNum);
-            if(i==list.size()-1) {
+            System.out.printf("coinType:%s cardNum:%s coinNum:%s restCardNum:%s restCoinNum:%s\n", coupon, cardNum, coinNum, restCardNum, restCoinNum);
+            if (i == list.size() - 1) {
                 //剩余币数量不足,需要补齐
-                restCardNum = totalCardNum-sumCardNum;
-                restCoinNum = totalCoins-sumCoinNum;
-                int restno = restCoinNum/coupon;
+                restCardNum = totalCardNum - sumCardNum;
+                restCoinNum = totalCoins - sumCoinNum;
+                int restno = restCoinNum / coupon;
                 //如果剩余的卡数多于
-                if(restCardNum>restno) {
+                if (restCardNum > restno) {
                     couponsWithNums.put(coupon, restCardNum);
-                }else{
+                } else {
                     couponsWithNums.put(coupon, restno);
 
                 }
@@ -119,6 +119,18 @@ public class MathTest {
 
 //        System.out.printf("%s",new Random().nextInt(150));
         return couponsWithNums;
+    }
+
+    @Test
+    public void main5() {
+        int length = 2531;
+        int count = 500;
+        int i = length / count;
+        if (length % count > 0) {
+            i += 1;
+        }
+
+        System.out.println(i);
     }
 
 }

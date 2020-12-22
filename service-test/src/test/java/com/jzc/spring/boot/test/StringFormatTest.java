@@ -28,5 +28,19 @@ public class StringFormatTest {
         }
     }
 
+    @Test
+    public void ascii() {
+        String asc = "带我去和";
+
+        char[] chars = asc.toCharArray();
+
+        System.out.println(chars.length);
+
+        for (int i = 0; i < chars.length; i++) {
+            System.out.println((int) chars[i]);
+        }
+
+    }
+
 
 }
