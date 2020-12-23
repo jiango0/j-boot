@@ -1,4 +1,4 @@
-package com.java.spring.boot.event;
+package com.jzc.spring.boot.event;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

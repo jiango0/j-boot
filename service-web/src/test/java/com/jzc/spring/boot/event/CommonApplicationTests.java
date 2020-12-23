@@ -1,4 +1,4 @@
-package com.java.spring.boot.event;
+package com.jzc.spring.boot.event;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;

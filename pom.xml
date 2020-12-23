@@ -35,6 +35,7 @@
         <module>service-wechat</module>
         <module>service-thread</module>
         <module>service-sharding</module>
+        <module>service-canal</module>
     </modules>
 
     <dependencyManagement>

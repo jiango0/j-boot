@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CopyFile {
 
-    private static String target_path = "D:\\javaresources\\j-boot\\service-generate\\src\\main\\java\\com\\jzc\\spring\\generate\\temp\\";
+    private static String target_path = "D:\\javaresources\\j-boot\\service-generate\\src\\main\\jzc\\com\\jzc\\spring\\generate\\temp\\";
 
     private static String target_package = "com.jzc.spring.generate.temp.";
 
@@ -78,7 +78,7 @@ public class CopyFile {
         if(files != null && files.length != 0) {
             for(File file : files) {
                 String fileName = file.getAbsolutePath();
-                fileName = fileName.substring(fileName.lastIndexOf("\\") + 1, fileName.lastIndexOf(".java"));
+                fileName = fileName.substring(fileName.lastIndexOf("\\") + 1, fileName.lastIndexOf(".jzc"));
 
                 System.out.println(target_package + fileName);
 

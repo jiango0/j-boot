@@ -72,7 +72,7 @@
 
         <!--<dependency>-->
             <!--<groupId>mysql</groupId>-->
-            <!--<artifactId>mysql-connector-java</artifactId>-->
+            <!--<artifactId>mysql-connector-jzc</artifactId>-->
             <!--<scope>runtime</scope>-->
         <!--</dependency>-->
         <!-- druid-->

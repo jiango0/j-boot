@@ -1,4 +1,4 @@
-package com.java.spring.boot.event;
+package com.jzc.spring.boot.event;
 
 import gui.ava.html.image.generator.HtmlImageGenerator;
 

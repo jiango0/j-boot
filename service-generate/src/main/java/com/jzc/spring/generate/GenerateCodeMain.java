@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GenerateCodeMain {
 
-    private static String path = "D:\\javaresources\\ty-mall-product\\ty-product-business\\src\\main\\java\\com\\toonyoo\\product\\business\\controller";
+    private static String path = "D:\\javaresources\\ty-mall-product\\ty-product-business\\src\\main\\jzc\\com\\toonyoo\\product\\business\\controller";
 
 
     public static void main(String[] args) {
