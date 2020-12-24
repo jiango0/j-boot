@@ -1,5 +1,6 @@
 package com.jzc.spring.boot.canal.client;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.CanalEntry.*;
@@ -9,7 +10,10 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Component
@@ -113,9 +117,26 @@ public class CanalClient implements InitializingBean {
     }
 
     private static void printColumn(List<Column> columns) {
+        List<Map<String, Object>> list = new ArrayList<>();
         for (Column column : columns) {
-            System.out.println(column.getName() + " : " + column.getValue() + "    update=" + column.getUpdated());
+//            System.out.println(column.getName() + " : " + column.getValue() + "    update=" + column.getUpdated());
+            Map<String, Object> map = new HashMap<>();
+
+            map.put("name", column.getName());
+            map.put("value", column.getValue());
+            map.put("index", column.getIndex());
+            map.put("isKey", column.getIsKey());
+            map.put("isNull", column.getIsNull());
+            map.put("length", column.getLength());
+            map.put("mysqlType", column.getMysqlType());
+            map.put("mysqlTypeBytes", column.getMysqlTypeBytes());
+            map.put("parserForType", column.getParserForType());
+            map.put("sqlType", column.getSqlType());
+
+            list.add(map);
         }
+
+        System.out.println(JSON.toJSONString(list));
     }
 
 }
