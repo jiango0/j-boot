@@ -36,6 +36,7 @@
         <module>service-thread</module>
         <module>service-sharding</module>
         <module>service-canal</module>
+        <module>service-upload</module>
     </modules>
 
     <dependencyManagement>
