@@ -67,4 +67,13 @@ public class BigdecimalTest {
         xx = amount;
     }
 
+    @Test
+    public void bigdecimalScale() {
+        BigDecimal bigDecimal = new BigDecimal("11.22");
+
+        System.out.println(bigDecimal.setScale(4, BigDecimal.ROUND_UP));
+
+    }
+
+
 }

@@ -3,15 +3,12 @@ package com.jzc.spring.boot.event;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.jzc.spring.boot.Application;
-import com.jzc.spring.boot.common.entity.PageList;
 import com.jzc.spring.boot.event.entity.Release;
 import com.jzc.spring.boot.event.service.ReleaseService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
@@ -51,13 +48,13 @@ public class ReleaseApplicationTests {
         releaseService.delete(1524063516360L);
     }
 
-    @Test
-    public void getPage() {
-        Pageable pageable = new PageRequest(0, 5);
-        PageList<Release> list = releaseService.getPage("樱花", pageable);
-
-        System.out.println(JSON.toJSONString(list, SerializerFeature.PrettyFormat));
-    }
+//    @Test
+//    public void getPage() {
+//        Pageable pageable = new PageRequest(0, 5);
+//        PageList<Release> list = releaseService.getPage("樱花", pageable);
+//
+//        System.out.println(JSON.toJSONString(list, SerializerFeature.PrettyFormat));
+//    }
 
     @Test
     public void detail() {
