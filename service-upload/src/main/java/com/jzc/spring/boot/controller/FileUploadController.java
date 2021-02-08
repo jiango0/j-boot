@@ -26,12 +26,12 @@ import java.util.stream.Collectors;
 public class FileUploadController {
 
     @RequestMapping(value = "upload")
-    public List<LogResultEntity> uploadFile(@RequestParam("file") MultipartFile file,
+    public Map<String, Object> uploadFile(@RequestParam("file") MultipartFile file,
                                             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date beginDate,
                                             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endDate,
                                             String logTypeName,
                                             String cardNo) {
-        List<LogResultEntity> statistics = new ArrayList<>();
+        Map<String, Object> result = new HashMap<>();
         Reader reader = null;
         BufferedReader bufferedReader = null;
         List<String> list = new ArrayList<>();
@@ -43,8 +43,7 @@ public class FileUploadController {
                 list.add(row);
             }
             List<LogEntity> logEntityList = parse(list, beginDate, endDate, logTypeName, cardNo);
-            statistics.addAll(statistics(logEntityList));
-            log.info("logEntityList {}", JSON.toJSONString(logEntityList));
+            result.putAll(statistics(logEntityList));
         } catch (Exception e) {
             log.error("", e);
         } finally {
@@ -60,7 +59,7 @@ public class FileUploadController {
             }
         }
 
-        return statistics;
+        return result;
     }
 
     private List<LogEntity> parse(List<String> list, Date beginDate, Date endDate, String logTypeName, String cardNo) {
@@ -122,9 +121,7 @@ public class FileUploadController {
         return logEntityList;
     }
 
-    private List<LogResultEntity> statistics(List<LogEntity> logEntityList) {
-        List<LogResultEntity> resultEntity = new ArrayList<>();
-
+    private Map<String, LogResultEntity> statistics(List<LogEntity> logEntityList) {
         Map<LogTypeEnum, List<MessageEntity>> logTypeEnumMap = new HashMap<>();
         for (LogEntity logEntity : logEntityList) {
             if (logTypeEnumMap.containsKey(logEntity.getLogTypeEnum())) {
@@ -135,6 +132,7 @@ public class FileUploadController {
             }
         }
 
+        Map<String, LogResultEntity> logResultEntityMap = new HashMap<>();
         for (Map.Entry<LogTypeEnum, List<MessageEntity>> entry : logTypeEnumMap.entrySet()) {
             Function<List<MessageEntity>, MessageResultEntity> resultFunction = entry.getKey().getResultFunction();
             if (resultFunction == null) {
@@ -145,10 +143,13 @@ public class FileUploadController {
             logResultEntity.setLogTypeEnum(entry.getKey());
             logResultEntity.setLogTypeName(entry.getKey().getType());
             logResultEntity.setDetail(resultFunction.apply(entry.getValue()));
-            resultEntity.add(logResultEntity);
+
+            logResultEntityMap.put(entry.getKey().name(), logResultEntity);
         }
 
-        return resultEntity;
+        return logResultEntityMap;
     }
+
+
 
 }
