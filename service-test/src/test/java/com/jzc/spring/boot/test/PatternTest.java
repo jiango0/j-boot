@@ -9,9 +9,11 @@ public class PatternTest {
     @Test
     public void patternTest() {
 
-        String value = "1000";
+        String value = "99999999.1234";
 
-        System.out.println(Pattern.matches("[0-9]{1,3}", value));
+        Pattern quantityPattern = Pattern.compile("^(\\d{1,8}(\\.\\d{1,4})?)$");
+
+        System.out.print(!quantityPattern.matcher(value).matches());
 
     }
 
