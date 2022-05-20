@@ -177,7 +177,7 @@
         <spring.mongo.version>1.8.4.RELEASE</spring.mongo.version>
         <!-- google's setting -->
         <google.guava>18.0</google.guava>
-        <google.gson>2.8.0</google.gson>
+        <google.gson>2.8.9</google.gson>
 
         <jzc.version>1.0-SNAPSHOT</jzc.version>
 
